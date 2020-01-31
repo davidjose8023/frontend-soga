@@ -1,0 +1,116 @@
+<div class="animated fadeIn">
+
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+    
+            <input #input (keyup)="buscarPaciente(input.value)" type="text" class="form-control" placeholder="Buscar Paciente">
+    
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="row" *ngIf='cargando'>
+      <div class="col-sm-12">
+    
+        <div class="alert alert-warning text-center">
+      
+          <strong>Cargando</strong>
+          <br>
+          <i class="fa fa-refresh fa-spin fa-2x "></i>
+          <br>
+          <span>Espere por favor</span>
+      
+        </div>
+    
+      </div>
+    
+    </div>
+  
+    <div class="row" *ngIf='!cargando'>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block">
+                <div>
+                    <h4 class="card-title"><span class="lstick"></span>Pacientes registrados ( <small>{{totalRegistro}}</small> )</h4>
+                    <h6 class="card-subtitle">Lista de Pacientes</h6></div>
+                <div class="ml-auto">
+                    
+                    <button [routerLink]="['/paciente', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-info"><i class="fa fa-plus"></i> Paciente</button>
+                </div>
+                
+            </div>
+    
+            
+  
+            <table class="table table-hover">
+  
+              <thead>
+                <tr>
+  
+                  <th>Imagen</th>
+                  <th>Paciente</th>
+                  <th>sexo</th>
+                  
+                  <th></th>
+  
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor='let paciente of pacientes'>
+                  <td class="w70">
+                    <img [src]="paciente.img | imagen: 'pacientes'" class="img-50 pointer" (click)="mostrarModal(paciente._id)">
+                  </td>
+                  <td >
+                    {{ paciente.nombre }}
+                  </td>
+                  <td>
+                    {{ paciente.sexo}}
+                  </td>
+              
+               
+              
+                  <td>
+                    <div class="button-group">
+                      <button [routerLink]="['/paciente', paciente._id]" class="btn btn-primary">
+                        <i class="fa fa-edit"></i>
+    
+                      </button>
+                      <button (click)="borrarPaciente( paciente )" class="btn btn-danger" >
+                          <i class="fa fa-trash-o"></i>
+      
+                        </button>
+  
+  
+                    </div>
+                    
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="button-group">
+  
+              <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+  
+                Anteriores
+    
+              </button>
+              <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+    
+                Siguientes
+      
+              </button>
+            </div>
+            
+    
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  
+  

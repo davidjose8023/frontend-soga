@@ -1,0 +1,25 @@
+<div class="fondo-negro animated fadeIn" [ngClass]="_modalUploadService.oculto">
+
+  <div style="display: block;" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cambiar Foto</h4>
+                <button (click)="cerrarModal()" type="button" class="close"  aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <img *ngIf="!imagenTemp" [src]="_modalUploadService.img || 'xxx' | imagen: _modalUploadService.tipo" class="w150">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+                    <input #archivoImg (change)= "seleccionImagen( $event.target.files[0] )" type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="cerrarModal()" type="button" class="btn btn-default waves-effect">Cerrar</button>
+                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="submit" class="btn btn-danger waves-effect waves-light">Guardar</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>

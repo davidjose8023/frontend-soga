@@ -1,0 +1,124 @@
+<div class="row animated fadeIn">
+  
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Médico</h4>
+        </div>
+        <div class="card-body">
+            <form ngNativeValidate #f="ngForm" (ngSubmit)="guardarMedico( f )"  class="form-horizontal form-bordered">
+                <div class="form-body">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-md-3">Nombre</label>
+                        <div class="col-md-9">
+                        <input [(ngModel)]="medico.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre de usuario" required>
+                            <!-- <small class="form-control-feedback"> This is inline help </small>  -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label text-right col-md-3">Hospital</label>
+                        <div class="col-md-9">
+                            
+                            <select (change)="cambiarImgHospital( $event.target.value )"  [(ngModel)]="medico.hospital" name="hospital" class="form-control custom-select" required>
+                                <option value="">Seleccione ...</option>
+                                <option *ngFor="let hospital of hospitales"  [value]="hospital._id">
+                                    {{ hospital.nombre }}
+                                </option>
+                            
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+        
+                                <div class="offset-sm-3 col-md-9">
+                                    <div class="button-group">
+                                        
+                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+                                    
+                                        <a [routerLink]="['/medicos']" class="btn btn-inverse"><i class="fa fa-mail-reply"></i> Volver</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3">
+    <div class="card">
+        <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Hospital</h4>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal form-bordered">
+                <div class="form-body">
+                
+                    <h4 class="card-title">Foto</h4>
+                    <h6 *ngIf="hospital._id" class="card-subtitle">{{ hospital.nombre }}</h6>
+                    <div class="form-group">
+                        <img  [src]="hospital.img | imagen: 'hospitales'" class="rounded img-fluid">
+                        
+            
+                    </div>
+                    
+                    
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3" *ngIf="medico._id">
+    <div class="card">
+        <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Médico</h4>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal form-bordered">
+                <div class="form-body">
+                
+                    <h4 class="card-title">Foto</h4>
+                    <h6 *ngIf="medico._id" class="card-subtitle">{{ medico.nombre }}</h6>
+                    <div class="form-group row">
+                        <img *ngIf="!imagenTemp" [src]="medico.img || 'xxx' | imagen: 'medicos'" class="wh150">
+                        <img *ngIf="imagenTemp" [src]="imagenTemp" class="wh150">
+                        <!-- <input (change)= "seleccionImagen( $event.target.files[0] )" type="file"> -->
+                        <label class="custom-file d-block">
+                            <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
+                            <span class="custom-file-control"></span>
+                        </label>
+                    </div>
+
+                    
+                    
+                </div>
+
+                
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="offset-sm-2 col-md-2">
+                                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
