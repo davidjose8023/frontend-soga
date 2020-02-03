@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { APP_ROUTES } from './app.routes';
 import { PagesComponent } from './pages/pages.component';
 import { SharedModule } from './shared/shared.module';
+import { MyErrorHandler } from './myerrorhandler.component';
+import { ErrorHandler } from '@angular/core';
 
 
 
@@ -42,7 +44,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule
     
   ],
-  providers: [],
+  providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
