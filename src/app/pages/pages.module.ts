@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // modulos
 import { SharedModule } from '../shared/shared.module';
@@ -60,6 +60,7 @@ import { PacienteComponent } from './pacientes/paciente.component';
           SharedModule,
           PAGES_ROUTES,
           FormsModule,
+          ReactiveFormsModule,
           ChartsModule,
           PipesModule
       ]
