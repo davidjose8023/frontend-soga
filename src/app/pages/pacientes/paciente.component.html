@@ -11,20 +11,20 @@
                       <hr>
                       <div class="row p-t-20">
                           <div class="col-md-6">
-                              <div class="form-group">
+                              <div [class]="forma.errors?.validacion && !forma.pristine ? nombresValidado.has_danger:'form-group'">
                                   <label class="control-label">Nombres</label>
-                                  <input  formControlName="nombres"   name="nombres" required type="text" id="nombre" class="form-control">
-                                  <!-- <small class="form-control-feedback">Es requerido</small>  -->
+                              <input  formControlName="nombres"   name="nombres" required type="text" id="nombre" class="form-control {{ nombresValidado.form_control_danger }}">
+                                  <small *ngIf="forma.errors?.validacion && !forma.pristine"  class="form-control-feedback">{{nombresValidado.msj}}</small> 
                                 </div>
                           </div>
                           <!--/span-->
                           <div class="col-md-6">
                               <!-- <div class="form-group has-danger"> -->
-                              <div class="form-group">
+                              <div [class]="forma.errors?.validacion && !forma.pristine ? nombresValidado.has_danger:'form-group'">
                                   <label class="control-label">Apellidos</label>
                                   <!-- <input type="text" id="lastName" class="form-control form-control-danger" placeholder="12n"> -->
-                                  <input formControlName="apellidos"   name="apellido" required type="text" required id="apellido" class="form-control form-control-danger">
-                                  <!-- <small class="form-control-feedback"> Es requerido </small>--> 
+                                  <input formControlName="apellidos"   name="apellido" required type="text" required id="apellido" class="form-control {{ apellidosValidado.form_control_danger }}">
+                                  <small *ngIf="forma.errors?.validacion && !forma.pristine" class="form-control-feedback"> Es requerido </small> 
                                 </div> 
                           </div>
                           <!--/span-->
@@ -84,11 +84,11 @@
                                 <!-- <small class="form-control-feedback"> This is inline help </small> --> 
                             </div> 
                         </div>
-                        <div class="form-group" *ngIf="forma.errors?.validacion && !forma.pristine">
+                        <!-- <div class="form-group" *ngIf="forma.errors?.validacion && !forma.pristine">
                             <p class="text-danger">
                                 Las contraseñas deben ser iguales
                             </p>
-                        </div>
+                        </div> -->
                           
       
                       </div>
