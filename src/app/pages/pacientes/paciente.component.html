@@ -11,20 +11,20 @@
                       <hr>
                       <div class="row p-t-20">
                           <div class="col-md-6">
-                              <div [class]="forma.errors?.validacion && !forma.pristine ? nombresValidado.has_danger:'form-group'">
+                              <div [class]="nombres.invalid && (nombres.dirty || nombres.touched)  ? nombresValidado.has_danger:'form-group'">
                                   <label class="control-label">Nombres</label>
                               <input  formControlName="nombres"   name="nombres" required type="text" id="nombre" class="form-control {{ nombresValidado.form_control_danger }}">
-                                  <small *ngIf="forma.errors?.validacion && !forma.pristine"  class="form-control-feedback">{{nombresValidado.msj}}</small> 
+                                  <small *ngIf="nombres.invalid && (nombres.dirty || nombres.touched) "  class="form-control-feedback">{{nombresValidado.msj}}</small> 
                                 </div>
                           </div>
                           <!--/span-->
                           <div class="col-md-6">
                               <!-- <div class="form-group has-danger"> -->
-                              <div [class]="forma.errors?.validacion && !forma.pristine ? nombresValidado.has_danger:'form-group'">
+                              <div [class]="apellidos.invalid && (apellidos.dirty || apellidos.touched)  ? apellidosValidado.has_danger:'form-group'">
                                   <label class="control-label">Apellidos</label>
                                   <!-- <input type="text" id="lastName" class="form-control form-control-danger" placeholder="12n"> -->
                                   <input formControlName="apellidos"   name="apellido" required type="text" required id="apellido" class="form-control {{ apellidosValidado.form_control_danger }}">
-                                  <small *ngIf="forma.errors?.validacion && !forma.pristine" class="form-control-feedback"> Es requerido </small> 
+                                  <small *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="form-control-feedback"> {{this.apellidosValidado.msj}} </small> 
                                 </div> 
                           </div>
                           <!--/span-->
@@ -62,10 +62,10 @@
                       <div class="row">
 
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div [class]="rut.invalid && (rut.dirty || rut.touched)  ? rutValidado.has_danger:'form-group'">
                                 <label class="control-label">Rut</label>
                                 <input formControlName="rut"   required type="text" id="rut" class="form-control">
-                                <!-- <small class="form-control-feedback"> This is inline help </small> --> 
+                                <small *ngIf="rut.invalid && (rut.dirty || rut.touched)" class="form-control-feedback"> {{this.rutValidado.msj}} </small> 
                             </div> 
                         </div>
 
