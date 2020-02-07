@@ -51,9 +51,10 @@
               <thead>
                 <tr>
   
-                  <th>Imagen</th>
+                  <th>Foto</th>
                   <th>Paciente</th>
                   <th>sexo</th>
+                  <th>Estado Civil</th>
                   
                   <th></th>
   
@@ -66,10 +67,13 @@
                     <img [src]="paciente.img | imagen: 'pacientes'" class="img-50 pointer" (click)="mostrarModal(paciente._id)">
                   </td>
                   <td >
-                    {{ paciente.nombres }}
+                    {{ paciente.nombres }} {{ paciente.apellidos }}
                   </td>
                   <td>
-                    {{ paciente.sexo}}
+                    {{ paciente.sexo | paciente: 'sexo' }}
+                  </td>
+                  <td>
+                    {{ paciente.ec | paciente: 'ec'}}
                   </td>
               
                

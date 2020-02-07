@@ -44,7 +44,8 @@ import { ErrorHandler } from '@angular/core';
     SharedModule
     
   ],
-  providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],
+  //providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

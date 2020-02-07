@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { Paciente } from '../../models/paciente.model';
 import swal from 'sweetalert';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PacienteService } from 'src/app/service/service.index';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-paciente',
@@ -16,10 +18,10 @@ export class PacienteComponent implements OnInit {
   imagenTemp: any;
   forma : FormGroup;
  
-  nombresValidado: any = {has_danger:'', form_control_danger:'', msj:''};
-  apellidosValidado: any = {has_danger:'', form_control_danger:'', msj:''};
+  nombresValidado: any = {has_danger:'', form_control_danger:''};
+  apellidosValidado: any = {has_danger:'', form_control_danger:''};
   rutValidado: any = {has_danger:'', form_control_danger:'', msj:''};
-  correolValidado: any = {has_danger:'', form_control_danger:'', msj:''};
+  correoValidado: any = {has_danger:'', form_control_danger:'', msj:''};
   telefonoValidado: any = {has_danger:'', form_control_danger:'', msj:''};
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -27,7 +29,14 @@ export class PacienteComponent implements OnInit {
  
 
  
-  constructor(private titulo_navegador: Title) { }
+  constructor(
+    private titulo_navegador: Title, 
+    private _pacienteService: PacienteService,
+    public router: Router,
+    public activateRoute: ActivatedRoute) 
+    { }
+
+
   validacion(campo1: string, campo2: string, campo3: string, campo4:string, campo5: string){
 
     return (group: FormGroup) => {
@@ -36,6 +45,7 @@ export class PacienteComponent implements OnInit {
       let correo = group.controls[campo3];
       let rut = group.controls[campo4];
       let telefono = group.controls[campo5];
+      let respuesta= null;
      
        
       if(nombre.invalid){
@@ -51,7 +61,8 @@ export class PacienteComponent implements OnInit {
           
         if(nombre.errors.maxlength)
           this.nombresValidado.msj= 'El nombre es muy largo';
-        
+
+          respuesta = { validacion: true }
       }
       if(apellido.invalid){
         //console.log(apellido);
@@ -67,6 +78,7 @@ export class PacienteComponent implements OnInit {
         if(apellido.errors.maxlength)
           this.apellidosValidado.msj= 'El apellido es muy largo';
         
+        respuesta = { validacion: true }
       }
       if(rut.invalid){
         //console.log(apellido);
@@ -81,11 +93,42 @@ export class PacienteComponent implements OnInit {
           
         if(rut.errors.maxlength)
           this.rutValidado.msj= 'El rut es muy largo';
+          
+          
+        respuesta = { validacion: true }
+      }
+      if(telefono.invalid){
+        //console.log(apellido);
+        this.telefonoValidado.has_danger= 'form-group has-danger';
+        this.telefonoValidado.form_control_danger= 'form-control form-control-danger';
+
+        if(telefono.errors.required)
+          this.telefonoValidado.msj= 'El telefono es requerido';
         
+        if(telefono.errors.minlength)
+          this.telefonoValidado.msj= 'El telefono es muy corto';
+          
+        if(telefono.errors.maxlength)
+          this.telefonoValidado.msj= 'El telefono es muy largo';
+        
+        respuesta = { validacion: true }
+      }
+      if(correo.invalid){
+        //console.log(correo);
+        this.correoValidado.has_danger= 'form-group has-danger';
+        this.correoValidado.form_control_danger= 'form-control form-control-danger';
+
+        if(correo.errors.required)
+          this.correoValidado.msj= 'El telefono es requerido';
+        
+        if(correo.errors.pattern)
+          this.correoValidado.msj= 'El correo no es valido';
+        
+        respuesta = { validacion: true }
       }
       
 
-      return { validacion: true }
+      return respuesta;
     }
   }
   get nombres(){return this.forma.get('nombres')}
@@ -93,25 +136,87 @@ export class PacienteComponent implements OnInit {
   get rut(){return this.forma.get('rut')}
   get telefono(){return this.forma.get('telefono')}
   get correo(){return this.forma.get('correo')}
+  get sexo(){return this.forma.get('sexo')}
+  get ec(){return this.forma.get('ec')}
 
   ngOnInit() {
     this.titulo_navegador.setTitle('Cloud H & S | Pacientes');
+    this.formGroupValidation();
+  }
+
+  formGroupValidation(){
+
     this.forma = new FormGroup({
       
       nombres: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       apellidos: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       correo: new FormControl(null, [Validators.required, Validators.pattern(this.emailPattern)]),
       rut: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(8)]),
-      telefono: new FormControl(null, [Validators.required])
+      sexo: new FormControl(null),
+      ec: new FormControl(null),
+      telefono: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8)])
     }, this.validacion('nombres','apellidos','correo','rut','telefono'));
+
+    this.sexo.setValue(0);
+    this.ec.setValue(0);
   }
 
-  
-
-  
+  activeDiryOnForm()
+{
+    let inputAryVar = this.forma.controls
+    for(let keyVar in inputAryVar)
+    {
+        //inputAryVar[keyVar].markAsTouched();
+        inputAryVar[keyVar].markAsDirty();
+    }
+}
 
   crearPaciente(){
+  
+    if(this.forma.invalid){
+      this.activeDiryOnForm();
+ 
+    
+      swal("Error", "Verifica los datos del formulario", "error");
+      return;
+    }
+    
 
+    if(this.forma.valid){
+
+      let pacienteForm = new Paciente(
+        this.forma.value.nombres,
+        this.forma.value.apellidos,
+        this.forma.value.telefono,
+        this.forma.value.rut,
+        this.forma.value.sexo,
+        this.forma.value.correo,
+        this.forma.value.ec
+        
+      );
+   
+      //console.log(pacienteForm);
+      this._pacienteService.guardarPaciente(pacienteForm)
+      .subscribe( paciente => {
+     
+        this.paciente._id =  paciente._id;
+
+        if(this.imagenSubir){
+
+          this._pacienteService.cambiarImagenNuevo(this.imagenSubir, this.paciente._id);
+        }
+        
+        
+        if(paciente._id){
+
+          swal('Operación Satisfacia', paciente.nombres, 'success');
+          this.router.navigate(['/paciente', paciente._id]);
+        }
+
+        
+      });
+
+    }
   }
 
   seleccionImagen( archivo: File ){

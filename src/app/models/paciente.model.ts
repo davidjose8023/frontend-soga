@@ -11,6 +11,6 @@ export class Paciente {
         public ec?: string,
         public img?: string,
         public _id?: string,
-        public usuario?: string,
+        public usuario?: string
     ){}
 }
