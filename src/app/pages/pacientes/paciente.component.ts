@@ -142,6 +142,36 @@ export class PacienteComponent implements OnInit {
   ngOnInit() {
     this.titulo_navegador.setTitle('Cloud H & S | Pacientes');
     this.formGroupValidation();
+    this.activateRoute.params.subscribe(params => {
+
+      if(params['id'] !== 'nuevo'){
+        this.getPacienteId(params['id']);
+        
+      }
+
+    });
+  }
+
+  getPacienteId( id: string ){
+
+    this._pacienteService.obtenerPaciente(id)
+          .subscribe( (resp: any) => {
+            console.log(resp);
+            this.paciente= resp.paciente;
+     
+            this.nombres.setValue(resp.paciente.nombres);
+            this.apellidos.setValue(resp.paciente.apellidos);
+            this.sexo.setValue(resp.paciente.sexo);
+            this.ec.setValue(resp.paciente.ec);
+            this.telefono.setValue(resp.paciente.telefono);
+            this.rut.setValue(resp.paciente.rut);
+            this.correo.setValue(resp.paciente.email);
+ 
+ 
+ 
+           
+          });
+
   }
 
   formGroupValidation(){
@@ -172,10 +202,10 @@ export class PacienteComponent implements OnInit {
 }
 
   crearPaciente(){
-  
+    
     if(this.forma.invalid){
       this.activeDiryOnForm();
- 
+
     
       swal("Error", "Verifica los datos del formulario", "error");
       return;
@@ -194,14 +224,19 @@ export class PacienteComponent implements OnInit {
         this.forma.value.ec
         
       );
-   
+
+      if(this.paciente._id){
+        pacienteForm._id = this.paciente._id;
+        pacienteForm.img = this.paciente.img;
+      }
+    
       //console.log(pacienteForm);
       this._pacienteService.guardarPaciente(pacienteForm)
       .subscribe( paciente => {
-     
+      
         this.paciente._id =  paciente._id;
 
-        if(this.imagenSubir){
+        if(this.imagenSubir && !paciente.img){
 
           this._pacienteService.cambiarImagenNuevo(this.imagenSubir, this.paciente._id);
         }

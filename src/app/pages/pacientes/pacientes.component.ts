@@ -108,11 +108,11 @@ export class PacientesComponent implements OnInit {
         this._pacienteService.borrarPaciente(paciente._id)
       .subscribe( (PacienteBorrado: any) => {
 
-        //console.log(usuario);
+        //console.log(PacienteBorrado);
         //this.
         this.cargarPacientes();
 
-        swal('Operación Exitosa', 'Se elimino correctamente el paciente ' + PacienteBorrado.nombres , 'success');
+        swal('Operación Exitosa', 'Se elimino correctamente el paciente ' + PacienteBorrado.paciente.nombres , 'success');
         //this.totalRegistro= resp.total;
         //this.usuarios= usuarios;
         //this.cargando = false;

@@ -27,12 +27,12 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Dashboard' } 
     },
     { path : 'progress', canActivate: [VerificaTokenGuard],  component : ProgressComponent, data: { titulo: 'Progress' }  },
-    { path : 'graficas1',  component : Graficas1Component, data: { titulo: 'Gráficas' } },
-    { path : 'promesas',  component : PromesasComponent, data: { titulo: 'Promesas' } },
-    { path : 'rxjs',  component : RxjsComponent, data: { titulo: 'Rxjs' } },
-    { path : 'profile',  component : ProfileComponent, data: { titulo: 'Perfil' } },
-    { path : 'busqueda/:termino',  component : BusquedaComponent, data: { titulo: 'Buscador' } },
-    { path : 'account-settings',  component : AccoutSettingsComponent, data: { titulo: 'Ajustes de Temas' } },
+    { path : 'graficas1', canActivate: [VerificaTokenGuard],  component : Graficas1Component, data: { titulo: 'Gráficas' } },
+    { path : 'promesas',canActivate: [VerificaTokenGuard],  component : PromesasComponent, data: { titulo: 'Promesas' } },
+    { path : 'rxjs', canActivate: [VerificaTokenGuard], component : RxjsComponent, data: { titulo: 'Rxjs' } },
+    { path : 'profile',canActivate: [VerificaTokenGuard],  component : ProfileComponent, data: { titulo: 'Perfil' } },
+    { path : 'busqueda/:termino', canActivate: [VerificaTokenGuard],  component : BusquedaComponent, data: { titulo: 'Buscador' } },
+    { path : 'account-settings', canActivate: [VerificaTokenGuard],  component : AccoutSettingsComponent, data: { titulo: 'Ajustes de Temas' } },
     //Mantenimiento::::::::::::::::::::::
     { 
         path : 'usuarios',  
@@ -40,11 +40,11 @@ const pagesRoutes: Routes = [
         component : UsuariosComponent, 
         data: { titulo: 'Mantenimiento de Usuarios' } 
     },
-    { path : 'hospitales',  component : HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
-    { path : 'medicos',  component : MedicosComponent, data: { titulo: 'Mantenimiento de Médicos' } },
-    { path : 'medico/:id',  component : MedicoComponent, data: { titulo: 'Actualizar Médico' } },
-    { path : 'pacientes',  component : PacientesComponent, data: { titulo: 'Mantenimiento de Pacientes' } },
-    { path : 'paciente/:id',  component : PacienteComponent, data: { titulo: 'Actualizar Paciente' } },
+    { path : 'hospitales', canActivate: [VerificaTokenGuard], component : HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
+    { path : 'medicos', canActivate: [VerificaTokenGuard],  component : MedicosComponent, data: { titulo: 'Mantenimiento de Médicos' } },
+    { path : 'medico/:id',canActivate: [VerificaTokenGuard],   component : MedicoComponent, data: { titulo: 'Actualizar Médico' } },
+    { path : 'pacientes',canActivate: [VerificaTokenGuard], component : PacientesComponent, data: { titulo: 'Mantenimiento de Pacientes' } },
+    { path : 'paciente/:id',canActivate: [VerificaTokenGuard],  component : PacienteComponent, data: { titulo: 'Actualizar Paciente' } },
     { path : '',  redirectTo : '/dashboard', pathMatch: 'full' }
 
 ];

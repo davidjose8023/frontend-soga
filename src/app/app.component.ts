@@ -11,5 +11,7 @@ export class AppComponent {
 
   constructor(public serviceSetting: SettingsService){
 
+    window.parent.document.body.style.zoom="80%";
+
   }
 }

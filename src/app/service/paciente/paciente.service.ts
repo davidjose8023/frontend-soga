@@ -52,7 +52,7 @@ export class PacienteService {
    }
 
    guardarPaciente(paciente: Paciente){
-
+    console.log(paciente);
     if(paciente._id){// actualizar
 
       let url = `${URL_SERVICIOS}/paciente/${paciente._id}`;
