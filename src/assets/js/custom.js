@@ -33,8 +33,12 @@ function init_plugins(){
             var height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
             height = height - topOffset;
             if (height < 1) height = 1;
+            
+
+            
             if (height > topOffset) {
-                $(".page-wrapper").css("min-height", (height) + "px");
+ 
+                $(".page-wrapper").css("min-height", (screen.height + 50) + "px");
             }
 
         };
