@@ -109,6 +109,19 @@
       
               </button>
             </div>
+              
+              <div class="row">  
+                  <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
+                      <div class="float-right"> 
+                        <app-paginador 
+                        [totalRecords]="totalRegistro" 
+                        [recordsPerPage]="1" 
+                        (onPageChange)="displayActivePage($event)">
+                      </app-paginador> 
+                    </div>     
+                  </div>  
+              </div>  
+  
             
     
           </div>

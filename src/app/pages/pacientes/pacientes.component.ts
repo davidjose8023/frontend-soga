@@ -17,6 +17,12 @@ export class PacientesComponent implements OnInit {
   desde: number = 0;
   totalRegistro: number= 0;
   cargando: boolean = true;
+  
+  activePage:number = 0;  
+  
+  displayActivePage(activePageNumber:number){  
+    this.activePage = activePageNumber  
+  }
  
 
   constructor(public _usuarioService: UsuarioService,

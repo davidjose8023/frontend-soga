@@ -20,6 +20,7 @@ import { PagesComponent } from './pages/pages.component';
 import { SharedModule } from './shared/shared.module';
 import { MyErrorHandler } from './myerrorhandler.component';
 import { ErrorHandler } from '@angular/core';
+import { PaginadorModule } from './components/paginador/paginador.module';
 
 
 
@@ -30,7 +31,9 @@ import { ErrorHandler } from '@angular/core';
     RegisterComponent,
     LoginComponent,
     
-    PagesComponent
+    PagesComponent,
+    
+    
     
   ],
   imports: [
@@ -41,7 +44,8 @@ import { ErrorHandler } from '@angular/core';
     FormsModule,
     ReactiveFormsModule,
     ServiceModule,
-    SharedModule
+    SharedModule,
+    PaginadorModule
     
   ],
   //providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],

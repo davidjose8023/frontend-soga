@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // modulos
+import { PaginadorModule } from '../components/paginador/paginador.module';
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
@@ -25,6 +26,7 @@ import { MedicoComponent } from './medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { PacienteComponent } from './pacientes/paciente.component';
+
 
 
 @NgModule({
@@ -62,7 +64,8 @@ import { PacienteComponent } from './pacientes/paciente.component';
           FormsModule,
           ReactiveFormsModule,
           ChartsModule,
-          PipesModule
+          PipesModule,
+          PaginadorModule
       ]
 })
 export class PagesModule {}
