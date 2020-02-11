@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../service/settings/settings.service';
 
 
@@ -8,6 +8,7 @@ import { SettingsService } from '../../service/settings/settings.service';
   styles: []
 })
 export class AccoutSettingsComponent implements OnInit {
+  rango: string;
 
   constructor( public _settingsService: SettingsService) { 
 
@@ -16,6 +17,7 @@ export class AccoutSettingsComponent implements OnInit {
   ngOnInit() {
 
     this.reasignarCheck();
+    this.reasignarZoon();
   }
 
   cambiarColor(tema: string, link: any){
@@ -57,6 +59,24 @@ export class AccoutSettingsComponent implements OnInit {
       
     }
  
+  }
+  reasignarZoon(){
+    this.rango = this._settingsService.zoon;
+  }
+
+  changeRango(input){
+
+  
+    //console.log(input.value);
+    let valor  = parseInt(input.value);
+    if(valor < 80){
+      valor= 80;
+    }
+    this.rango = valor.toString();
+    this._settingsService.aplicarZoon(this.rango);
+    
+ 
+
   }
 
 

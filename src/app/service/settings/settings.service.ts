@@ -11,6 +11,8 @@ export class SettingsService {
     tema:'default'
   }
 
+  zoon: string ='80';
+
   constructor(@Inject(DOCUMENT) private _document) {
     this.cargarAjustes();
    }
@@ -18,7 +20,18 @@ export class SettingsService {
     //console.log('Guardar ajustes');
     localStorage.setItem('ajustes',JSON.stringify(this.ajustes));
   }
+  guardarZoon(){
+ 
+ 
+    localStorage.setItem('zoon',this.zoon);
+  }
   cargarAjustes(){
+
+    if(localStorage.getItem('zoon')){
+      this.zoon = localStorage.getItem('zoon');
+  
+    }
+    this.aplicarZoon(this.zoon);
     if(localStorage.getItem('ajustes')){
 
       this.ajustes = JSON.parse(localStorage.getItem('ajustes')) ;
@@ -27,6 +40,13 @@ export class SettingsService {
     }else{
       //console.log('Cargando valores por default');
     }
+  }
+
+  aplicarZoon(zoon: string){
+    window.parent.document.body.style.zoom= zoon + '%';
+    this.zoon = zoon;
+    this.guardarZoon();
+    
   }
 
   aplicarTema(tema: string){

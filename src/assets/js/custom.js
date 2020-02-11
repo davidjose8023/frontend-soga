@@ -38,7 +38,7 @@ function init_plugins(){
             
             if (height > topOffset) {
  
-                $(".page-wrapper").css("min-height", (screen.height + 50) + "px");
+                $(".page-wrapper").css("min-height", screen.height + "px");
             }
 
         };

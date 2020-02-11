@@ -1,10 +1,10 @@
 <div class="row">
-  <div class="col-4">
+  <div class="col-lg-6">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Colores</h5>
         <div class="r-panel-body">
-          <ul id="themecolors" class="m-t-20">
+          <ul id="themecolors" class="m-t-40">
               <li><b>Con el sidebar claro</b></li>
               <li><a #link1 (click)="cambiarColor('default', link1)" data-theme="default" class="selector default-theme">1</a></li>
               <li><a #link2 (click)="cambiarColor('green', link2)" data-theme="green" class="selector green-theme working">2</a></li>
@@ -25,5 +25,19 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Zoom Screen({{  rango }}%)</h5>
+        <div class="form-group row">
+ 
+          <div class="col-10">
+              <input #input type="range" class="form-control" id="range" [value]="rango" (change)="changeRango(input)">
+          </div>
+      </div>
+      </div>
+    </div>
+
   </div>
 </div>
