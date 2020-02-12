@@ -9,7 +9,7 @@ export class PaginadorComponent implements OnChanges{
   @Input() totalRecords: number = 0;  
   @Input() recordsPerPage: number = 0;  
 
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();  
+  @Output() onPageChange: EventEmitter<any> = new EventEmitter();  
 
   public pages: number [] = [];  
   activePage:number;  
@@ -18,7 +18,8 @@ export class PaginadorComponent implements OnChanges{
     const pageCount = this.getPageCount();  
     this.pages = this.getArrayOfPage(pageCount);  
     this.activePage = 1;  
-    this.onPageChange.emit(1);  
+    //this.onPageChange.emit(1);  
+    this.onPageChange.emit({activePage:1, direccion: false});  
   }  
 
   private  getPageCount(): number {  
@@ -46,10 +47,12 @@ export class PaginadorComponent implements OnChanges{
     return pageArray;  
   }  
 
-  onClickPage(pageNumber:number){  
+  //onClickPage(pageNumber:number){  
+  onClickPage(pageNumber:number, direccion:string){  
       if(pageNumber < 1) return;
       if(pageNumber > this.pages.length) return;
       this.activePage = pageNumber;  
-      this.onPageChange.emit(this.activePage);  
+      //this.onPageChange.emit({activePage:this.activePage, flechas});  
+      this.onPageChange.emit({activePage:this.activePage, direccion});  
   }  
 }  

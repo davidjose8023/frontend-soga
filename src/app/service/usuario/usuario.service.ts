@@ -210,7 +210,7 @@ export class UsuarioService {
                     //console.log(resp);
                     this.usuario.img = resp.usuario.img;
 
-                    this.guardarStorage(this.usuario._id, this.token, this.usuario, resp.menu);
+                    this.guardarStorage(this.usuario._id, this.token, this.usuario, this.menu);
 
                     swal('Imagen Actualizada', this.usuario.nombre, 'success' );
 

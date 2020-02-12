@@ -33,8 +33,13 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-  
-          <h3 class="card-title"> Usuarios registrados ( <small>{{totalRegistro}}</small> )</h3>
+          <div class="d-flex no-block">
+            <div>
+                <h4 class="card-title"><span class="lstick"></span>Usuarios registrados ( <small>{{totalRegistro}}</small> )</h4>
+                <h6 class="card-subtitle">Lista de Usuarios</h6>
+            </div>
+            
+        </div>
 
           <table class="table table-hover">
 
@@ -73,11 +78,11 @@
                 <td>
                   <div class="button-group">
 
-                    <button (click)="actualizarUsuario( usuario )" class="btn btn-primary">
+                    <button (click)="actualizarUsuario( usuario )" class="btn btn-info btn-rounded">
                       <i class="fa fa-save"></i>
   
                     </button>
-                    <button (click)="borrarUsuario(usuario)" class="btn btn-danger" >
+                    <button (click)="borrarUsuario(usuario)" class="btn btn-danger btn-rounded" >
                         <i class="fa fa-trash-o"></i>
     
                       </button>

@@ -80,14 +80,10 @@
               
                   <td>
                     <div class="button-group">
-                      <button [routerLink]="['/paciente', paciente._id]" class="btn btn-primary">
-                        <i class="fa fa-edit"></i>
-    
-                      </button>
-                      <button (click)="borrarPaciente( paciente )" class="btn btn-danger" >
-                          <i class="fa fa-trash-o"></i>
-      
-                        </button>
+                      
+                      <button [routerLink]="['/paciente', paciente._id]" type="button" class="btn btn-info btn-rounded"><i class="fa fa-edit"></i></button>
+                   
+                      <button  (click)="borrarPaciente( paciente )"  type="button" class="btn btn-danger btn-rounded"><i class="fa fa-trash-o"></i></button>
   
   
                     </div>
@@ -114,7 +110,7 @@
                   <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
                       <div class="float-right"> 
                         <app-paginador 
-                        [totalRecords]="totalRegistro" 
+                        [totalRecords]="numeroPaginas" 
                         [recordsPerPage]="1" 
                         (onPageChange)="displayActivePage($event)">
                       </app-paginador> 

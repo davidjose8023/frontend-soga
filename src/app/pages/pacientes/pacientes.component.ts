@@ -16,12 +16,37 @@ export class PacientesComponent implements OnInit {
   pacientes: Paciente[] = [] ;
   desde: number = 0;
   totalRegistro: number= 0;
+  numeroPaginas: number= 0;
   cargando: boolean = true;
   
   activePage:number = 0;  
   
-  displayActivePage(activePageNumber:number){  
-    this.activePage = activePageNumber  
+  //displayActivePage(activePageNumber:number){  
+  displayActivePage(Pageinfo:any){  
+    console.log(Pageinfo);
+    //this.activePage = activePageNumber;
+    this.activePage = Pageinfo.activePage ;
+    if(Pageinfo.direccion){
+      if(Pageinfo.direccion == 'prev' ){
+  
+        this.cambiarDesde((this.activePage * 5) * (-1));
+      }
+      if(Pageinfo.direccion == 'next' ){
+        this.cambiarDesde(this.activePage * 5);
+      }
+      if(Pageinfo.direccion == 'fija' ){
+
+        if((this.activePage * 5) < this.desde  ){
+
+          this.cambiarDesde((this.activePage * 5) * (-1));
+        }
+
+        if((this.activePage * 5) > this.desde  ){
+          this.cambiarDesde(this.activePage * 5);
+        }
+      }
+
+    }
   }
  
 
@@ -44,9 +69,9 @@ export class PacientesComponent implements OnInit {
     this._pacienteService.cargarPaciente(this.desde)
             .subscribe( (resp: any) => {
 
-              //console.log(resp);
-
               this.totalRegistro= resp.total;
+ 
+              this.numeroPaginas= resp.total?(resp.total/5) % 1 == 0 ? resp.total/5:Math.floor(resp.total/5) + 1: 0;
               this.pacientes= resp.pacientes;
               this.cargando = false;
             });
@@ -55,7 +80,8 @@ export class PacientesComponent implements OnInit {
   cambiarDesde(valor: number){
 
     let desde = this.desde + valor;
-    //console.log(desde);
+    console.log(valor);
+    console.log(desde);
 
     if(desde > this.totalRegistro){
       return;
