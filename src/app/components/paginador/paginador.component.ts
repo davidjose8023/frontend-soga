@@ -1,4 +1,4 @@
-import {  Component , Input , OnChanges , Output , EventEmitter } from '@angular/core';
+import {  Component , Input , OnChanges , Output , EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-paginador',
@@ -12,14 +12,24 @@ export class PaginadorComponent implements OnChanges{
   @Output() onPageChange: EventEmitter<any> = new EventEmitter();  
 
   public pages: number [] = [];  
-  activePage:number;  
+  @Input() activePage:number = 1;  
+  @Input() direccion:any = false;  
 
-  ngOnChanges(){  
+  ngOnChanges(changes: SimpleChanges){  
+
     const pageCount = this.getPageCount();  
-    this.pages = this.getArrayOfPage(pageCount);  
-    this.activePage = 1;  
-    //this.onPageChange.emit(1);  
-    this.onPageChange.emit({activePage:1, direccion: false});  
+    this.pages = this.getArrayOfPage(pageCount);
+    if(changes.firstChange){
+      this.onPageChange.emit({activePage:1, direccion: false}); 
+    }
+
+    if(changes.previousValue != changes.currentValue){
+
+        
+   
+      //this.onPageChange.emit(1);  
+      this.onPageChange.emit({activePage:this.activePage, direccion: this.direccion});  
+    }
   }  
 
   private  getPageCount(): number {  

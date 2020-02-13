@@ -22,6 +22,21 @@ export class UsuariosComponent implements OnInit {
   desde: number = 0;
   totalRegistro: number= 0;
   cargando: boolean = true;
+
+  numeroPaginas: number= 0;
+  activePage:number = 1;  
+  direccion:any = false;  
+  
+  //displayActivePage(activePageNumber:number){  
+  displayActivePage(Pageinfo:any){  
+ 
+    this.activePage = Pageinfo.activePage ;
+    this.desde = this.activePage == 1 ? 0 : (this.activePage * 5)  - 5;
+    this.direccion = Pageinfo.direccion;
+    if(Pageinfo.direccion){
+      this.cambiarPaginador();
+    }
+  }
   constructor(public _usuarioService: UsuarioService,public _modalUploadService: ModalUploadService) { }
 
   ngOnInit() {
@@ -41,9 +56,30 @@ export class UsuariosComponent implements OnInit {
               //console.log(resp);
 
               this.totalRegistro= resp.total;
+              this.numeroPaginas= resp.total?(resp.total/5) % 1 == 0 ? resp.total/5:Math.floor(resp.total/5) + 1: 0;
               this.usuarios= resp.usuarios;
               this.cargando = false;
             });
+
+  }
+  cambiarPaginador(){
+
+    
+    let desde = this.desde ;
+
+    if(desde >= this.totalRegistro){
+
+     return;
+       
+    }
+
+    if(desde < 0){
+      return;
+    }
+
+  
+ 
+    this.cargarUsuarios();
 
   }
 

@@ -16,36 +16,20 @@ export class PacientesComponent implements OnInit {
   pacientes: Paciente[] = [] ;
   desde: number = 0;
   totalRegistro: number= 0;
-  numeroPaginas: number= 0;
   cargando: boolean = true;
-  
-  activePage:number = 0;  
+
+  numeroPaginas: number= 0;
+  activePage:number = 1;  
+  direccion:any = false;  
   
   //displayActivePage(activePageNumber:number){  
   displayActivePage(Pageinfo:any){  
-    console.log(Pageinfo);
-    //this.activePage = activePageNumber;
+ 
     this.activePage = Pageinfo.activePage ;
+    this.desde = this.activePage == 1 ? 0 : (this.activePage * 5)  - 5;
+    this.direccion = Pageinfo.direccion;
     if(Pageinfo.direccion){
-      if(Pageinfo.direccion == 'prev' ){
-  
-        this.cambiarDesde((this.activePage * 5) * (-1));
-      }
-      if(Pageinfo.direccion == 'next' ){
-        this.cambiarDesde(this.activePage * 5);
-      }
-      if(Pageinfo.direccion == 'fija' ){
-
-        if((this.activePage * 5) < this.desde  ){
-
-          this.cambiarDesde((this.activePage * 5) * (-1));
-        }
-
-        if((this.activePage * 5) > this.desde  ){
-          this.cambiarDesde(this.activePage * 5);
-        }
-      }
-
+      this.cambiarPaginador();
     }
   }
  
@@ -77,13 +61,33 @@ export class PacientesComponent implements OnInit {
             });
   }
 
+  cambiarPaginador(){
+
+    
+    let desde = this.desde ;
+
+    if(desde >= this.totalRegistro){
+
+     return;
+       
+    }
+
+    if(desde < 0){
+      return;
+    }
+
+  
+ 
+    this.cargarPacientes();
+
+  }
+
   cambiarDesde(valor: number){
 
     let desde = this.desde + valor;
-    console.log(valor);
-    console.log(desde);
+ 
 
-    if(desde > this.totalRegistro){
+    if(desde >= this.totalRegistro){
       return;
     }
 
@@ -97,8 +101,7 @@ export class PacientesComponent implements OnInit {
   }
 
   buscarPaciente(termino : string){
-    
-    //console.log(termino);
+
 
     this.cargando = true;
 
@@ -107,9 +110,6 @@ export class PacientesComponent implements OnInit {
       this._pacienteService.buscarPaciente(termino)
       .subscribe( (paciente: Paciente[]) => {
 
-        //console.log(resp);
-
-        //this.totalRegistro= resp.total;
         this.pacientes= paciente;
         this.cargando = false;
       });
@@ -140,14 +140,11 @@ export class PacientesComponent implements OnInit {
         this._pacienteService.borrarPaciente(paciente._id)
       .subscribe( (PacienteBorrado: any) => {
 
-        //console.log(PacienteBorrado);
-        //this.
+    
         this.cargarPacientes();
 
         swal('Operación Exitosa', 'Se elimino correctamente el paciente ' + PacienteBorrado.paciente.nombres , 'success');
-        //this.totalRegistro= resp.total;
-        //this.usuarios= usuarios;
-        //this.cargando = false;
+
       });
 
 

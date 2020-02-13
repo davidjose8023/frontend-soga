@@ -21,6 +21,10 @@ export class MedicosComponent implements OnInit {
   totalRegistro: number= 0;
   cargando: boolean = true;
 
+  numeroPaginas: number= 0;
+  activePage:number = 1;  
+  direccion:any = false;  
+
   constructor(public _usuarioService: UsuarioService,
     public _modalUploadService: ModalUploadService,
     public _medicoService: MedicoService
@@ -33,6 +37,16 @@ export class MedicosComponent implements OnInit {
             .subscribe( resp => this.cargarMedicos());
   }
 
+  displayActivePage(Pageinfo:any){  
+
+    this.activePage = Pageinfo.activePage ;
+    this.desde = this.activePage == 1 ? 0 : (this.activePage * 5)  - 5;
+    this.direccion = Pageinfo.direccion;
+    if(Pageinfo.direccion){
+      this.cambiarPaginador();
+    }
+  }
+
   cargarMedicos(){
     this.cargando = true;
 
@@ -42,9 +56,31 @@ export class MedicosComponent implements OnInit {
               //console.log(resp);
 
               this.totalRegistro= resp.total;
+              this.numeroPaginas= resp.total?(resp.total/5) % 1 == 0 ? resp.total/5:Math.floor(resp.total/5) + 1: 0;
               this.medicos= resp.medicos;
               this.cargando = false;
             });
+  }
+
+  cambiarPaginador(){
+
+    
+    let desde = this.desde ;
+
+    if(desde >= this.totalRegistro){
+
+     return;
+       
+    }
+
+    if(desde < 0){
+      return;
+    }
+
+  
+    console.log('desde final',this.desde );
+    this.cargarMedicos();
+
   }
 
   cambiarDesde(valor: number){

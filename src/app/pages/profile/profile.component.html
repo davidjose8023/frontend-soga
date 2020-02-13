@@ -30,8 +30,35 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+            <div align="center" class="m-t-40"> 
+                <!-- <img src="../assets/images/users/5.jpg" class="img-circle" width="200"> -->
 
-    <div class="col-lg-5">
+                <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="img-circle" width="200">
+                <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="200">
+                 <h4 class="card-title m-t-10">{{ usuario.nombre }}</h4>
+                <!--<h6 class="card-subtitle">Accoubts Manager Amix corp</h6> -->
+                
+                <div class="row text-center justify-content-md-center">
+                    
+                    <label class="custom-file d-block">
+                        <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
+                        <span class="custom-file-control"></span>
+                    </label>
+                </div>
+                <br>
+
+                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                    <i class="fa fa-save"></i>
+                    Actualizar foto
+                </button>
+            </div>
+        </div>
+    
+    </div>
+
+    <!-- <div class="col-lg-5">
         <div class="card">
             <div class="card-body" align="center">
                 <h4 class="card-title">Foto</h4>
@@ -50,6 +77,6 @@
                 </button>
               </div>
           </div>
-    </div>
+    </div> -->
 
 </div>

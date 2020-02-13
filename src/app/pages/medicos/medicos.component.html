@@ -94,7 +94,7 @@
           </table>
           <div class="button-group">
 
-            <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+            <!-- <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
 
               Anteriores
   
@@ -103,7 +103,16 @@
   
               Siguientes
     
-            </button>
+            </button> -->
+            <div class="float-left"> 
+              <app-paginador 
+              [totalRecords]="numeroPaginas" 
+              [recordsPerPage]="1" 
+              [activePage]="activePage" 
+              [direccion]="direccion" 
+              (onPageChange)="displayActivePage($event)">
+            </app-paginador> 
+          </div> 
           </div>
           
   

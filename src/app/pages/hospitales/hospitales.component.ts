@@ -20,6 +20,24 @@ export class HospitalesComponent implements OnInit {
   totalRegistro: number= 0;
   cargando: boolean = true;
 
+  numeroPaginas: number= 0;
+  activePage:number = 1;  
+  direccion:any = false;  
+  
+
+  displayActivePage(Pageinfo:any){  
+    console.log(Pageinfo);
+    console.log('desde en emiter1',this.desde );
+    
+
+    this.activePage = Pageinfo.activePage ;
+    this.desde = this.activePage == 1 ? 0 : (this.activePage * 5)  - 5;
+    this.direccion = Pageinfo.direccion;
+    if(Pageinfo.direccion){
+      this.cambiarPaginador();
+    }
+  }
+
   constructor(public _usuarioService: UsuarioService,
     public _modalUploadService: ModalUploadService,
     public _hospitalService: HospitalService
@@ -38,9 +56,8 @@ export class HospitalesComponent implements OnInit {
     this._hospitalService.cargarHospital(this.desde)
             .subscribe( (resp: any) => {
 
-              //console.log(resp);
-
               this.totalRegistro= resp.total;
+              this.numeroPaginas= resp.total?(resp.total/5) % 1 == 0 ? resp.total/5:Math.floor(resp.total/5) + 1: 0;
               this.hospitales= resp.hospitales;
               this.cargando = false;
             });
@@ -49,9 +66,8 @@ export class HospitalesComponent implements OnInit {
   cambiarDesde(valor: number){
 
     let desde = this.desde + valor;
-    //console.log(desde);
 
-    if(desde > this.totalRegistro){
+    if(desde >= this.totalRegistro){
       return;
     }
 
@@ -60,6 +76,27 @@ export class HospitalesComponent implements OnInit {
     }
 
     this.desde += valor;
+    console.log('desde final',this.desde );
+    this.cargarHospitales();
+
+  }
+  cambiarPaginador(){
+
+    
+    let desde = this.desde ;
+
+    if(desde >= this.totalRegistro){
+
+     return;
+       
+    }
+
+    if(desde < 0){
+      return;
+    }
+
+  
+    console.log('desde final',this.desde );
     this.cargarHospitales();
 
   }
