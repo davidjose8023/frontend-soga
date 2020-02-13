@@ -57,7 +57,8 @@
             </thead>
 
             <tbody>
-              <tr *ngFor='let usuario of usuarios'>
+              <ng-container *ngFor='let usuario of usuarios'>
+                <tr [@enterAnimation] >
                 <td class="w70">
                   <img [src]="usuario.img | imagen" class="img-50 pointer" (click)="mostrarModal(usuario._id)">
                 </td>
@@ -90,6 +91,7 @@
                   </div>
                 </td>
               </tr>
+            </ng-container>
             </tbody>
           </table>
 

@@ -108,18 +108,21 @@
           </div>
       </div>
   </div>
-  <div class="col-lg-3"  >
+  <div class="col-lg-3">
     <div class="card">
         <div class="card-header bg-info">
-            <h4 class="m-b-0 text-white">Foto</h4>
+            <h4 class="m-b-0 text-white">Foto del Paciente</h4>
         </div>
         <div class="card">
             <div class="card-body">
-                <div class="m-t-30 text-center"> 
-                    <!-- <img src="../assets/images/users/5.jpg" class="img-circle" width="150"> -->
-                    <img *ngIf="!imagenTemp" [src]="paciente.img || 'xxx' | imagen: 'pacientes'" class="wh150">
-                        <img *ngIf="imagenTemp" [src]="imagenTemp" class="wh150">
-                
+                <div align="center" class="m-t-40"> 
+                    
+    
+                    <img *ngIf="!imagenTemp" [src]="paciente.img || 'xxx' | imagen: 'pacientes'" class="img-circle" width="200">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="250">
+                     <h4 class="card-title m-t-10">{{ paciente.nombres }}</h4>
+                    
+                    
                     <div class="row text-center justify-content-md-center">
                         
                         <label class="custom-file d-block">
@@ -127,11 +130,12 @@
                             <span class="custom-file-control"></span>
                         </label>
                     </div>
+    
                 </div>
             </div>
-         
-            
+        
         </div>
+
     </div>
 </div>
 </div>

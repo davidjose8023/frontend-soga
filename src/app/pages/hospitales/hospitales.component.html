@@ -60,7 +60,8 @@
             </thead>
 
             <tbody>
-              <tr *ngFor='let hospital of hospitales'>
+              <ng-container *ngFor='let hospital of hospitales'>
+                <tr [@enterAnimation] >
                 <td class="w70">
                   <img [src]="hospital.img | imagen: 'hospitales'" class="img-50 pointer" (click)="mostrarModal(hospital._id)">
                 </td>
@@ -85,6 +86,7 @@
                   </div>
                 </td>
               </tr>
+            </ng-container>
             </tbody>
           </table>
           <div class="button-group">

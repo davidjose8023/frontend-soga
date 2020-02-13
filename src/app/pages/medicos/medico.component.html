@@ -54,12 +54,46 @@
         </div>
     </div>
 </div>
+<div class="col-lg-3" *ngIf="medico._id">
+    <div class="card">
+        <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Foto del Médico</h4>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div align="center" class="m-t-40"> 
+                    <!-- <img src="../assets/images/users/5.jpg" class="img-circle" width="200"> -->
+    
+                    <img *ngIf="!imagenTemp" [src]="medico.img || 'xxx' | imagen: 'medicos'" class="img-circle" width="200">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="200">
+                     <h4 class="card-title m-t-10">{{ medico.nombre }}</h4>
+                    <!--<h6 class="card-subtitle">Accoubts Manager Amix corp</h6> -->
+                    
+                    <div class="row text-center justify-content-md-center">
+                        
+                        <label class="custom-file d-block">
+                            <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
+                            <span class="custom-file-control"></span>
+                        </label>
+                    </div>
+                    <br>
+    
+                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
 <div class="col-lg-3">
     <div class="card">
         <div class="card-header bg-info">
             <h4 class="m-b-0 text-white">Hospital</h4>
         </div>
-        <div class="card-body">
+        <!-- <div class="card-body">
             <form class="form-horizontal form-bordered">
                 <div class="form-body">
                 
@@ -75,50 +109,20 @@
                 </div>
 
             </form>
+        </div> -->
+        <div class="card">
+            <div class="card-body">
+                <div align="center" class="m-t-40"> 
+                      
+                    <img [src]="hospital.img | imagen: 'hospitales'" class="img-circle" width="250">
+                     <h4 *ngIf="hospital._id" class="card-title m-t-10">{{ hospital.nombre }}</h4>
+                    
+                </div>
+            </div>
+        
         </div>
     </div>
 </div>
-<div class="col-lg-3" *ngIf="medico._id">
-    <div class="card">
-        <div class="card-header bg-info">
-            <h4 class="m-b-0 text-white">Médico</h4>
-        </div>
-        <div class="card-body">
-            <form class="form-horizontal form-bordered">
-                <div class="form-body">
-                
-                    <h4 class="card-title">Foto</h4>
-                    <h6 *ngIf="medico._id" class="card-subtitle">{{ medico.nombre }}</h6>
-                    <div class="form-group row">
-                        <img *ngIf="!imagenTemp" [src]="medico.img || 'xxx' | imagen: 'medicos'" class="wh150">
-                        <img *ngIf="imagenTemp" [src]="imagenTemp" class="wh150">
-                        <!-- <input (change)= "seleccionImagen( $event.target.files[0] )" type="file"> -->
-                        <label class="custom-file d-block">
-                            <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
-                            <span class="custom-file-control"></span>
-                        </label>
-                    </div>
 
-                    
-                    
-                </div>
-
-                
-                <div class="form-actions">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="row">
-                                <div class="offset-sm-2 col-md-2">
-                                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 </div>

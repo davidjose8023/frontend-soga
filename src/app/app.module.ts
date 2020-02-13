@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
 //import { CommonModule } from '@angular/common';
 
@@ -38,6 +39,7 @@ import { PaginadorModule } from './components/paginador/paginador.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     APP_ROUTES,
     //CommonModule,
     //PagesModule,

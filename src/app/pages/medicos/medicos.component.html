@@ -12,7 +12,7 @@
       </div>
     </div>
   </div> 
-  <div class="row" *ngIf='cargando'>
+  <!-- <div class="row" *ngIf='cargando'>
     <div class="col-sm-12">
   
       <div class="alert alert-warning text-center">
@@ -27,6 +27,12 @@
   
     </div>
   
+  </div> -->
+  <div class="preloader" *ngIf='cargando'>
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Procesando...</p>
+    </div>
   </div>
 
   <div class="row" *ngIf='!cargando'>
@@ -61,7 +67,9 @@
             </thead>
 
             <tbody>
-              <tr *ngFor='let medico of medicos'>
+              <ng-container *ngFor='let medico of medicos'>
+ 
+              <tr [@enterAnimation] >
                 <td class="w70">
                   <img [src]="medico.img | imagen: 'medicos'" class="img-50 pointer" (click)="mostrarModal(medico._id)">
                 </td>
@@ -90,6 +98,7 @@
                   
                 </td>
               </tr>
+            </ng-container>
             </tbody>
           </table>
           <div class="button-group">

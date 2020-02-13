@@ -12,7 +12,7 @@
         </div>
       </div>
     </div> 
-    <div class="row" *ngIf='cargando'>
+    <!-- <div class="row" *ngIf='cargando'>
       <div class="col-sm-12">
     
         <div class="alert alert-warning text-center">
@@ -27,6 +27,12 @@
     
       </div>
     
+    </div> -->
+    <div class="preloader" *ngIf='cargando'>
+      <div class="loader">
+          <div class="loader__figure"></div>
+          <p class="loader__label">Procesando...</p>
+      </div>
     </div>
   
     <div class="row" *ngIf='!cargando'>
@@ -62,34 +68,42 @@
               </thead>
   
               <tbody>
-                <tr *ngFor='let paciente of pacientes'>
-                  <td class="w70">
-                    <img [src]="paciente.img | imagen: 'pacientes'" class="img-50 pointer" (click)="mostrarModal(paciente._id)">
-                  </td>
-                  <td >
-                    {{ paciente.nombres }} {{ paciente.apellidos }}
-                  </td>
-                  <td>
-                    {{ paciente.sexo | paciente: 'sexo' }}
-                  </td>
-                  <td>
-                    {{ paciente.ec | paciente: 'ec'}}
-                  </td>
-              
-               
-              
-                  <td>
-                    <div class="button-group">
+                <ng-container *ngFor='let paciente of pacientes'>
+                  <tr [@enterAnimation] >
+
+                    <td>
+
+                      <span class="round">
+   
+                        <img [src]="paciente.img | imagen: 'pacientes'" width="50" class="pointer" (click)="mostrarModal(paciente._id)">
+                      </span>
+                    </td>
+      
+                    <td >
+                      {{ paciente.nombres }} {{ paciente.apellidos }}
+                    </td>
+                    <td>
+                      {{ paciente.sexo | paciente: 'sexo' }}
+                    </td>
+                    <td>
+                      {{ paciente.ec | paciente: 'ec'}}
+                    </td>
+                
+                 
+                
+                    <td>
+                      <div class="button-group">
+                        
+                        <button [routerLink]="['/paciente', paciente._id]" type="button" class="btn btn-info btn-rounded"><i class="fa fa-edit"></i></button>
+                     
+                        <button  (click)="borrarPaciente( paciente )"  type="button" class="btn btn-danger btn-rounded"><i class="fa fa-trash-o"></i></button>
+    
+    
+                      </div>
                       
-                      <button [routerLink]="['/paciente', paciente._id]" type="button" class="btn btn-info btn-rounded"><i class="fa fa-edit"></i></button>
-                   
-                      <button  (click)="borrarPaciente( paciente )"  type="button" class="btn btn-danger btn-rounded"><i class="fa fa-trash-o"></i></button>
-  
-  
-                    </div>
-                    
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
             <div class="button-group">
