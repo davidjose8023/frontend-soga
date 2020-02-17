@@ -4,7 +4,13 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
+function select2(){
+    $(function() {
+        "use strict";
+        $('.select2').select2();
+    });
 
+}
 function init_plugins(){
 
     $(function() {

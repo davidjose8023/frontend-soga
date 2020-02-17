@@ -5,6 +5,8 @@ import swal from 'sweetalert';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacienteService } from 'src/app/service/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as $ from 'jquery';
+declare function select2();
 
 @Component({
   selector: 'app-paciente',
@@ -140,6 +142,9 @@ export class PacienteComponent implements OnInit {
   get ec(){return this.forma.get('ec')}
 
   ngOnInit() {
+ 
+    select2();
+    
     this.titulo_navegador.setTitle('Cloud H & S | Pacientes');
     this.formGroupValidation();
     this.activateRoute.params.subscribe(params => {

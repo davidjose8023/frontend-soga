@@ -84,6 +84,38 @@
                                 <small *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="form-control-feedback"> {{correoValidado.msj}} </small> 
                             </div> 
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Enfermedades</label>
+                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple">
+                                    <optgroup label="Alergias">
+                                        <option value="AK">Alaska</option>
+                                        <option value="HI">Hawaii</option>
+                                    </optgroup>
+                                    <optgroup label="Hereditarias">
+                                        <option value="CA">California</option>
+                                        <option value="NV">Nevada</option>
+                                        <option value="OR">Oregon</option>
+                                        <option value="WA">Washington</option>
+                                    </optgroup>
+                                    <optgroup label="Corazón">
+                                        <option value="AZ">Arizona</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="MT">Montana</option>
+                                        <option value="NE">Nebraska</option>
+                                        <option value="NM">New Mexico</option>
+                                        <option value="ND">North Dakota</option>
+                                        <option value="UT">Utah</option>
+                                        <option value="WY">Wyoming</option>
+                                    </optgroup>
+                                   
+                                   
+                                </select>
+                                
+                                
+                            </div> 
+                        </div>
                         <!-- <div class="form-group" *ngIf="forma.errors?.validacion && !forma.pristine">
                             <p class="text-danger">
                                 Las contraseñas deben ser iguales
