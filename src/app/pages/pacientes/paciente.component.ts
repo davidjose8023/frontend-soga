@@ -5,7 +5,6 @@ import swal from 'sweetalert';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacienteService } from 'src/app/service/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
-import * as $ from 'jquery';
 declare function select2();
 
 @Component({
