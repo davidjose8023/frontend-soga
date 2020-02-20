@@ -4,10 +4,14 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-function select2(){
+function init_form(){
     $(function() {
         "use strict";
         $('.select2').select2();
+        jQuery('.fecha_form').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
     });
 
 }
