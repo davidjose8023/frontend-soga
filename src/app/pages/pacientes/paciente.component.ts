@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacienteService } from 'src/app/service/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
+import { debounceTime } from 'rxjs/operators';
 declare function init_form();
 
 @Component({
@@ -195,6 +196,14 @@ export class PacienteComponent implements OnInit {
 
     this.sexo.setValue(0);
     this.ec.setValue(0);
+
+    this.forma.valueChanges
+    .pipe(
+      debounceTime(500)
+    )
+    .subscribe(value => {
+      console.log(value);
+    });
   }
 
   getPacienteId( id: string ){
