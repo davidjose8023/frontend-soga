@@ -48,7 +48,7 @@
                             <div [class]="fecha_nacimiento.invalid && (!fecha_nacimiento.pristine )  ? fechaNacimientoValidado.has_danger:'form-group'">
                                 <label class="control-label">Fecha de nacimiento</label>
                               
-                                    <input #inputFecha  formControlName="fecha_nacimiento"  name="fecha_nacimiento"   type="text" class="form-control fecha_form" id="datepicker-autoclose" placeholder="mm/dd/yyyy">
+                                    <input #inputFecha  formControlName="fecha_nacimiento"  name="fecha_nacimiento"  type="text" class="form-control fecha_form" id="datepicker-autoclose" placeholder="mm/dd/yyyy">
                                     <small *ngIf="fecha_nacimiento.invalid && (!fecha_nacimiento.pristine)" class="form-control-feedback"> {{fechaNacimientoValidado.msj}} </small> 
                              
                             </div>
@@ -97,7 +97,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Enfermedades</label>
-                                <select class="form-control select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple">
+                                <select  class="form-control select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple">
                                     <optgroup label="Alergias">
                                         <option value="AK">Alaska</option>
                                         <option value="HI">Hawaii</option>

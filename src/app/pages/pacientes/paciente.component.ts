@@ -38,7 +38,10 @@ export class PacienteComponent implements OnInit {
     private _pacienteService: PacienteService,
     public router: Router,
     public activateRoute: ActivatedRoute) 
-    { }
+    { 
+
+      this.formGroupValidation();
+    }
 
 
 
@@ -57,7 +60,7 @@ export class PacienteComponent implements OnInit {
     init_form();
     
     this.titulo_navegador.setTitle('Cloud H & S | Pacientes');
-    this.formGroupValidation();
+    
     this.activateRoute.params.subscribe(params => {
 
       if(params['id'] !== 'nuevo'){
@@ -188,7 +191,7 @@ export class PacienteComponent implements OnInit {
       apellidos: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       correo: new FormControl(null, [Validators.required, Validators.pattern(this.emailPattern)]),
       rut: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(8)]),
-      fecha_nacimiento: new FormControl(null, [Validators.required]),
+      fecha_nacimiento: new FormControl(null),
       sexo: new FormControl(null),
       ec: new FormControl(null),
       telefono: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8)])
@@ -197,13 +200,13 @@ export class PacienteComponent implements OnInit {
     this.sexo.setValue(0);
     this.ec.setValue(0);
 
-    this.forma.valueChanges
-    .pipe(
-      debounceTime(500)
-    )
-    .subscribe(value => {
-      console.log(value);
-    });
+    // this.forma.valueChanges
+    // .pipe(
+    //   debounceTime(500)
+    // )
+    // .subscribe(value => {
+    //   console.log(value);
+    // });
   }
 
   getPacienteId( id: string ){
@@ -239,8 +242,7 @@ export class PacienteComponent implements OnInit {
         inputAryVar[keyVar].markAsDirty();
     }
 }
- 
-  crearPaciente(){
+crearPaciente(){
 
     if(this.inputFecha.nativeElement.value){
       this.fecha_nacimiento.setValue(this.inputFecha.nativeElement.value);
