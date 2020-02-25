@@ -11,6 +11,7 @@ export { SidebarService } from './shared/sidebar.service';
 export { HospitalService } from './hospital/hospital.service';
 export { MedicoService } from './medico/medico.service';
 export { PacienteService } from './paciente/paciente.service';
+export { PatologiaService } from './patologia/patologia.service';
 
 
 

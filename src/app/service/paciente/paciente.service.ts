@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { UsuarioService } from '../usuario/usuario.service';
-import { Medico } from '../../models/medico.model';
+
 import { Paciente } from '../../models/paciente.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { Observable, throwError } from 'rxjs';
@@ -52,7 +52,7 @@ export class PacienteService {
    }
 
    guardarPaciente(paciente: Paciente){
-    console.log(paciente);
+    //console.log(paciente);
     if(paciente._id){// actualizar
 
       let url = `${URL_SERVICIOS}/paciente/${paciente._id}`;

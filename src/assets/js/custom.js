@@ -15,6 +15,9 @@ function init_form(){
     });
 
 }
+function getvalueSelect(){
+    return $('#patologias').val();
+}
 function init_plugins(){
 
     $(function() {
