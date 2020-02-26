@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 //ng2-charts
 import { ChartsModule } from 'node_modules/ng2-charts';
 
+import {DatePipe} from '@angular/common';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
@@ -66,6 +68,9 @@ import { PacienteComponent } from './pacientes/paciente.component';
           ChartsModule,
           PipesModule,
           PaginadorModule
-      ]
+      ],
+      providers: [
+        DatePipe
+      ],
 })
 export class PagesModule {}

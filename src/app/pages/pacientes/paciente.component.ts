@@ -6,8 +6,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacienteService, PatologiaService } from 'src/app/service/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
-import { stringify } from 'querystring';
+import { DatePipe } from '@angular/common';
+ 
 declare function init_form();
+declare function getvalueSelect();
 
 @Component({
   selector: 'app-paciente',
@@ -43,7 +45,8 @@ export class PacienteComponent implements OnInit {
     private _pacienteService: PacienteService,
     private _patologiaService: PatologiaService,
     public router: Router,
-    public activateRoute: ActivatedRoute) 
+    public activateRoute: ActivatedRoute,
+    private datePipe: DatePipe) 
     { 
       init_form();
     
@@ -201,7 +204,7 @@ export class PacienteComponent implements OnInit {
       apellidos: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       correo: new FormControl(null, [Validators.required, Validators.pattern(this.emailPattern)]),
       rut: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(8)]),
-      fecha_nacimiento: new FormControl(null),
+      fecha_nacimiento: new FormControl(Validators.required),
       //patologia: new FormControl(null),
       sexo: new FormControl(null),
       ec: new FormControl(null),
@@ -234,6 +237,7 @@ export class PacienteComponent implements OnInit {
             this.telefono.setValue(resp.paciente.telefono);
             this.rut.setValue(resp.paciente.rut);
             this.correo.setValue(resp.paciente.email);
+            this.fecha_nacimiento.setValue(this.datePipe.transform(resp.paciente.fecha_nacimiento,"dd/MM/yyyy"));
  
  
  
@@ -260,11 +264,11 @@ crearPaciente(){
     }
    
      
-    this.patologia = jQuery('#patologias').val();
+    this.patologia = getvalueSelect();
   
     
-    console.log(jQuery('#patologias').val());
-    console.log(this.inputFecha.nativeElement.value);
+ 
+    console.log(this.forma);
    
 
     if(this.forma.invalid){
@@ -277,19 +281,17 @@ crearPaciente(){
 
     if(this.forma.valid){
 
-      let pacienteForm = new Paciente(
-        this.forma.value.nombres,
-        this.forma.value.apellidos,
-        this.forma.value.telefono,
-        this.forma.value.rut,
-        this.forma.value.sexo,
-        this.forma.value.correo,
-        this.forma.value.ec,
-        stringify(this.inputFecha.nativeElement.value) ,
-        stringify(this.patologia)
-        
-      );
+      let pacienteForm = new Paciente();
 
+      pacienteForm.nombres = this.forma.value.nombres;
+      pacienteForm.apellidos = this.forma.value.apellidos;
+      pacienteForm.telefono = this.forma.value.telefono;
+      pacienteForm.sexo = this.forma.value.sexo;
+      pacienteForm.rut = this.forma.value.rut;
+      pacienteForm.email = this.forma.value.correo;
+      pacienteForm.ec = this.forma.value.ec;
+      pacienteForm.fecha_nacimiento = this.forma.value.fecha_nacimiento;
+      pacienteForm.patologia = this.patologia;
       if(this.paciente._id){
         pacienteForm.usuario = this.paciente.usuario;
         pacienteForm._id = this.paciente._id;
