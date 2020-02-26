@@ -10,7 +10,8 @@ function init_form(){
         $('.select2').select2();
         jQuery('.fecha_form').datepicker({
             autoclose: true,
-            todayHighlight: true
+            dateFormat: 'dd/mm/yy'
+            //todayHighlight: true
         });
     });
 
