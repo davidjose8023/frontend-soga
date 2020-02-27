@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
+declare function setZoon(valor);
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,8 @@ export class SettingsService {
   }
 
   aplicarZoon(zoon: string){
-    window.parent.document.body.style.zoom= zoon + '%';
+    //window.document.body.style.zoom= zoon + '%';
+    setZoon(zoon);
     this.zoon = zoon;
     this.guardarZoon();
     

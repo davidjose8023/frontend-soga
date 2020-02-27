@@ -5,12 +5,12 @@ import swal from 'sweetalert';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacienteService, PatologiaService } from 'src/app/service/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
-import { debounceTime } from 'rxjs/operators';
+//import { debounceTime } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
  
 declare function init_form();
 declare function getvalueSelect();
-declare function setvalueSelect(selectedValues);
+declare function setvalueSelect(valor);
 
 @Component({
   selector: 'app-paciente',
@@ -180,8 +180,9 @@ export class PacienteComponent implements OnInit {
         
         respuesta = { validacion: true }
       }
+       
       if(fecha_nacimiento.invalid){
-        console.log(this.inputFecha);
+        
         
         this.fechaNacimientoValidado.has_danger= 'form-group has-danger';
         this.fechaNacimientoValidado.form_control_danger= 'form-control form-control-danger';
@@ -190,6 +191,7 @@ export class PacienteComponent implements OnInit {
           this.fechaNacimientoValidado.msj= 'La fecha es requerida';
         
         respuesta = { validacion: true }
+        
       }
       
 
@@ -200,13 +202,14 @@ export class PacienteComponent implements OnInit {
 
   formGroupValidation(){
 
+    
     this.forma = new FormGroup({
       
       nombres: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       apellidos: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       correo: new FormControl(null, [Validators.required, Validators.pattern(this.emailPattern)]),
       rut: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(8)]),
-      fecha_nacimiento: new FormControl(Validators.required),
+      fecha_nacimiento: new FormControl(null, Validators.required),
       //patologia: new FormControl(null),
       sexo: new FormControl(null),
       ec: new FormControl(null),
@@ -215,6 +218,10 @@ export class PacienteComponent implements OnInit {
 
     this.sexo.setValue(0);
     this.ec.setValue(0);
+    //this.forma.controls['fecha_nacimiento'].setErrors({required: true});
+    
+  
+ 
 
     // this.forma.valueChanges
     // .pipe(
@@ -240,7 +247,10 @@ export class PacienteComponent implements OnInit {
             this.rut.setValue(resp.paciente.rut);
             this.correo.setValue(resp.paciente.email);
             //this.fecha_nacimiento.setValue(this.datePipe.transform(resp.paciente.fecha_nacimiento,"dd/MM/yyyy"));
-            this.fecha_nacimiento.setValue(resp.paciente.fecha_nacimiento);
+            if(resp.paciente.fecha_nacimiento){
+              this.fecha_nacimiento.setValue(resp.paciente.fecha_nacimiento);
+            }
+            
             setvalueSelect(resp.paciente.patologia);
    
           });

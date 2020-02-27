@@ -11,7 +11,7 @@ import {
   distinctUntilChanged,
   filter
 } from "rxjs/operators";
-import { fromEvent, of } from 'rxjs';
+import { fromEvent } from 'rxjs';
 
 
 @Component({
@@ -55,37 +55,37 @@ export class PacientesComponent implements OnInit {
     this._modalUploadService.notificador
             .subscribe( resp => this.cargarPacientes());
 
-            fromEvent(this.inputBusqueda.nativeElement, 'keyup').pipe(
-              // get value
-              map((event: any) => {
-                return event.target.value;
-              })
-              // if character length greater then 2
-              //,filter(res => res.length > 2)
-              // Time in milliseconds between key events
-              ,debounceTime(300)        
-              // If previous query is diffent from current   
-              ,distinctUntilChanged()
-              // subscription for response
-              ).subscribe((termino: string) => {
+    fromEvent(this.inputBusqueda.nativeElement, 'keyup').pipe(
+      // get value
+      map((event: any) => {
+        return event.target.value;
+      })
+      // if character length greater then 2
+      //,filter(res => res.length > 2)
+      // Time in milliseconds between key events
+      ,debounceTime(300)        
+      // If previous query is diffent from current   
+      ,distinctUntilChanged()
+      // subscription for response
+      ).subscribe((termino: string) => {
+
+        this.cargando = true;
+
+        if(termino.length > 0){
+
+          this._pacienteService.buscarPaciente(termino)
+          .subscribe( (paciente: Paciente[]) => {
+
+            this.pacientes= paciente;
+            this.cargando = false;
+          });
+        }else{
+          this.cargarPacientes();
+          this.cargando = false;
+        }
+  
         
-                this.cargando = true;
-        
-                if(termino.length > 0){
-        
-                  this._pacienteService.buscarPaciente(termino)
-                  .subscribe( (paciente: Paciente[]) => {
-        
-                    this.pacientes= paciente;
-                    this.cargando = false;
-                  });
-                }else{
-                  this.cargarPacientes();
-                  this.cargando = false;
-                }
-          
-                
-              });
+    });
 
             
   }
@@ -145,7 +145,7 @@ export class PacientesComponent implements OnInit {
 
   }
 
-  buscarPaciente(termino : string){
+  //buscarPaciente(termino : string){
 
     
 
@@ -167,7 +167,7 @@ export class PacientesComponent implements OnInit {
 
     
 
-  }
+  //}
 
   borrarPaciente(paciente: Paciente){
     

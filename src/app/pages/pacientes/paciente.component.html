@@ -101,7 +101,7 @@
                                 <select #selectEnfermedad id ="patologias" class="form-control select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple">
             
                                     <optgroup label="{{patologia.nombre}}" *ngFor='let patologia of patologias'>
-                                        <option selected value="{{enfermedad._id}}" *ngFor='let enfermedad of patologia.enfermedad'>
+                                        <option value="{{enfermedad._id}}" *ngFor='let enfermedad of patologia.enfermedad'>
                                             {{enfermedad.nombre}}
                                         </option>
                                     </optgroup>

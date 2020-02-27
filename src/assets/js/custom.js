@@ -7,20 +7,32 @@ File: js
 function init_form(){
     $(function() {
         "use strict";
-        $('.select2').select2();
+        $('.select2').select2({ top: 'auto' });
         $('#fecha_form').datepicker({
             autoclose: true,
-            //todayHighlight: true
+            todayHighlight: true
         });
+        //let datepicker = $('#fecha_form');
+ 
+        //datepicker.datepicker('setDate', new Date());
     });
 
 }
 function getvalueSelect(){
     return $('#patologias').val();
 }
+function setZoon(valor){
+    
+    $('body').css('zoom', ' ' + valor + '%');
+}
 function setvalueSelect(selectedValues){
-    console.log(selectedValues);
-    $('#patologias').select2('val',[selectedValues]);
+
+    //console.log(selectedValues);
+
+    setTimeout(function () {
+        $('#patologias').select2('val',[selectedValues]);
+    }, 500);
+    
 }
 function init_plugins(){
 
