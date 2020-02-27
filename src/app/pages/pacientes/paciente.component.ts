@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
  
 declare function init_form();
 declare function getvalueSelect();
+declare function setvalueSelect(selectedValues);
 
 @Component({
   selector: 'app-paciente',
@@ -48,7 +49,7 @@ export class PacienteComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     private datePipe: DatePipe) 
     { 
-      init_form();
+      
     
       this.titulo_navegador.setTitle('Cloud H & S | Pacientes');
     
@@ -71,6 +72,7 @@ export class PacienteComponent implements OnInit {
   
 
   ngOnInit() {
+    init_form();
  
     this._patologiaService.enfermedadXCategoria().subscribe((resp:any) => {
       this.patologias = resp.categorias;
@@ -237,11 +239,10 @@ export class PacienteComponent implements OnInit {
             this.telefono.setValue(resp.paciente.telefono);
             this.rut.setValue(resp.paciente.rut);
             this.correo.setValue(resp.paciente.email);
-            this.fecha_nacimiento.setValue(this.datePipe.transform(resp.paciente.fecha_nacimiento,"dd/MM/yyyy"));
- 
- 
- 
-           
+            //this.fecha_nacimiento.setValue(this.datePipe.transform(resp.paciente.fecha_nacimiento,"dd/MM/yyyy"));
+            this.fecha_nacimiento.setValue(resp.paciente.fecha_nacimiento);
+            setvalueSelect(resp.paciente.patologia);
+   
           });
 
   }

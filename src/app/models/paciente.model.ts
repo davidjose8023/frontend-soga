@@ -12,7 +12,7 @@ export class Paciente {
         public img?: string,
         public _id?: string,
         public usuario?: string,
-        public fecha_nacimiento?: Date,
+        public fecha_nacimiento?: string,
         public patologia?: any
     ){}
 }

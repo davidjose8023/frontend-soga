@@ -8,9 +8,8 @@ function init_form(){
     $(function() {
         "use strict";
         $('.select2').select2();
-        jQuery('.fecha_form').datepicker({
+        $('#fecha_form').datepicker({
             autoclose: true,
-            dateFormat: 'dd/mm/yy'
             //todayHighlight: true
         });
     });
@@ -18,6 +17,10 @@ function init_form(){
 }
 function getvalueSelect(){
     return $('#patologias').val();
+}
+function setvalueSelect(selectedValues){
+    console.log(selectedValues);
+    $('#patologias').select2('val',[selectedValues]);
 }
 function init_plugins(){
 

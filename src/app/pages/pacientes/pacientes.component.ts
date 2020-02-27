@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Paciente } from '../../models/paciente.model';
 import { UsuarioService, PacienteService } from '../../service/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 import swal from 'sweetalert';
 import { animacion } from '../../animaciones-angular/animacion.tablas';
+import {
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  filter
+} from "rxjs/operators";
+import { fromEvent, of } from 'rxjs';
 
 
 @Component({
@@ -22,6 +29,7 @@ export class PacientesComponent implements OnInit {
   numeroPaginas: number= 0;
   activePage:number = 1;  
   direccion:any = false;  
+  @ViewChild('input') inputBusqueda: ElementRef;
   
   //displayActivePage(activePageNumber:number){  
   displayActivePage(Pageinfo:any){  
@@ -46,7 +54,43 @@ export class PacientesComponent implements OnInit {
     this.cargarPacientes();
     this._modalUploadService.notificador
             .subscribe( resp => this.cargarPacientes());
+
+            fromEvent(this.inputBusqueda.nativeElement, 'keyup').pipe(
+              // get value
+              map((event: any) => {
+                return event.target.value;
+              })
+              // if character length greater then 2
+              //,filter(res => res.length > 2)
+              // Time in milliseconds between key events
+              ,debounceTime(300)        
+              // If previous query is diffent from current   
+              ,distinctUntilChanged()
+              // subscription for response
+              ).subscribe((termino: string) => {
+        
+                this.cargando = true;
+        
+                if(termino.length > 0){
+        
+                  this._pacienteService.buscarPaciente(termino)
+                  .subscribe( (paciente: Paciente[]) => {
+        
+                    this.pacientes= paciente;
+                    this.cargando = false;
+                  });
+                }else{
+                  this.cargarPacientes();
+                  this.cargando = false;
+                }
+          
+                
+              });
+
+            
   }
+
+  
 
   cargarPacientes(){
     this.cargando = true;
@@ -103,21 +147,23 @@ export class PacientesComponent implements OnInit {
 
   buscarPaciente(termino : string){
 
+    
 
-    this.cargando = true;
 
-    if(termino.length > 0){
+    // this.cargando = true;
 
-      this._pacienteService.buscarPaciente(termino)
-      .subscribe( (paciente: Paciente[]) => {
+    // if(termino.length > 0){
 
-        this.pacientes= paciente;
-        this.cargando = false;
-      });
-    }else{
-      this.cargarPacientes();
-      this.cargando = false;
-    }
+    //   this._pacienteService.buscarPaciente(termino)
+    //   .subscribe( (paciente: Paciente[]) => {
+
+    //     this.pacientes= paciente;
+    //     this.cargando = false;
+    //   });
+    // }else{
+    //   this.cargarPacientes();
+    //   this.cargando = false;
+    // }
 
     
 
