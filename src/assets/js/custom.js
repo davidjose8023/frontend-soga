@@ -4,6 +4,12 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
+
+/*$(document).on('change','#fecha_form',function(){
+    $(this).val($(this).val());
+
+});*/
+
 function init_form(){
     $(function() {
         "use strict";

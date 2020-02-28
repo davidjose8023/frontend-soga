@@ -89,6 +89,7 @@ export class PacienteComponent implements OnInit {
   
  
   }
+ 
 
   validacion(campo1: string, campo2: string, campo3: string, campo4:string, campo5: string, campo6:string){
 
@@ -268,6 +269,14 @@ export class PacienteComponent implements OnInit {
         inputAryVar[keyVar].markAsDirty();
     }
 }
+onFocusOut(event) {
+  //this.input$.skipLast(1);
+ // do http request in service immediately 
+ setTimeout(()=>{    //<<<---    using ()=> syntax
+  this.fecha_nacimiento.setValue(event.target.value);
+  }, 300);
+}
+
 crearPaciente(){
 
     if(this.inputFecha.nativeElement.value){

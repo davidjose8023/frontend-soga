@@ -48,7 +48,7 @@
                             <div [class]="fecha_nacimiento.invalid && (!fecha_nacimiento.pristine )  ? fechaNacimientoValidado.has_danger:'form-group'">
                                 <label class="control-label">Fecha de nacimiento</label>
                               
-                                    <input #inputFecha data-date-format='dd/mm/yyyy'  formControlName="fecha_nacimiento"  name="fecha_nacimiento"  type="text" class="form-control fecha_form" id="fecha_form" placeholder="dd/mm/yyyy">
+                                    <input #inputFecha data-date-format='dd/mm/yyyy'  formControlName="fecha_nacimiento"  (focusout)="onFocusOut($event)" name="fecha_nacimiento"  type="text" class="form-control fecha_form" id="fecha_form" placeholder="dd/mm/yyyy">
                                     <small *ngIf="fecha_nacimiento.invalid && (!fecha_nacimiento.pristine)" class="form-control-feedback"> {{fechaNacimientoValidado.msj}} </small> 
                              
                             </div>
