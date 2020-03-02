@@ -2,11 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../service/usuario/usuario.service';
 import swal from 'sweetalert';
+import { trigger,transition,query,style,stagger,animate,keyframes }
+from '@angular/animations'
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styles: []
+  styles: [],
+  animations: [
+    trigger('listStagger', [
+      transition('* <=> *', [
+        query(':enter', 
+        [
+          style({ opacity: 0, transform: 'translateY(-35px)' }),
+          stagger('50ms', 
+          animate('550ms ease-out',
+        style({ opacity: 1, transform: 'translateY(0px)'})))
+        ], {optional: true}),
+        query(':leave', animate('50ms', style({ opacity: 0 })),{optional: true})
+      ])
+    ]) 
+  ]
 })
 export class ProfileComponent implements OnInit {
   

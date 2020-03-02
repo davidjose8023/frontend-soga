@@ -7,6 +7,8 @@ import { PacienteService, PatologiaService } from 'src/app/service/service.index
 import { Router, ActivatedRoute } from '@angular/router';
 //import { debounceTime } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { trigger,transition,query,style,stagger,animate,keyframes }
+from '@angular/animations'
  
 declare function init_form();
 declare function getvalueSelect();
@@ -15,7 +17,21 @@ declare function setvalueSelect(valor);
 @Component({
   selector: 'app-paciente',
   templateUrl: './paciente.component.html',
-  styles: []
+  styles: [],
+  animations: [
+    trigger('listStagger', [
+      transition('* <=> *', [
+        query(':enter', 
+        [
+          style({ opacity: 0, transform: 'translateY(-35px)' }),
+          stagger('50ms', 
+          animate('550ms ease-out',
+        style({ opacity: 1, transform: 'translateY(0px)'})))
+        ], {optional: true}),
+        query(':leave', animate('50ms', style({ opacity: 0 })),{optional: true})
+      ])
+    ]) 
+  ]
 })
 export class PacienteComponent implements OnInit {
 
