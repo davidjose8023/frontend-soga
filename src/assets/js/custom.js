@@ -10,6 +10,28 @@ File: js
 
 });*/
 
+function init_calendar() {
+    $('#calendar').fullCalendar({
+        editable: true,
+        height: 280,
+        displayEventTime : false,
+        views: {
+            month:{ buttonText: 'Calendario' },
+            listYear: { buttonText: 'Lista de Incidencias' }
+        },
+        header: {
+            //language: 'es',
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,listYear'
+
+        }
+    });
+
+
+}
+
+
 function init_form(){
     $(function() {
         "use strict";
