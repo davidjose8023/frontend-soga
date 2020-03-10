@@ -5,6 +5,7 @@ import { UsuarioService, PacienteService } from '../../service/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 import swal from 'sweetalert';
 import { animacion } from '../../animaciones-angular/animacion.tablas';
+ 
 import {
   debounceTime,
   map,
@@ -18,6 +19,7 @@ import { fromEvent } from 'rxjs';
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
   animations: animacion
+
 })
 export class PacientesComponent implements OnInit {
 

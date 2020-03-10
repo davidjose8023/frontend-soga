@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
+import { AgendaComponent } from './agenda/agenda.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardsGuard, AdminGuard } from '../service/service.index';
@@ -33,6 +34,7 @@ const pagesRoutes: Routes = [
     { path : 'profile',canActivate: [VerificaTokenGuard],  component : ProfileComponent, data: { titulo: 'Perfil' } },
     { path : 'busqueda/:termino', canActivate: [VerificaTokenGuard],  component : BusquedaComponent, data: { titulo: 'Buscador' } },
     { path : 'account-settings', canActivate: [VerificaTokenGuard],  component : AccoutSettingsComponent, data: { titulo: 'Ajustes de Temas' } },
+    { path : 'agenda', canActivate: [VerificaTokenGuard],  component : AgendaComponent, data: { titulo: 'Agenda Médica' } },
     //Mantenimiento::::::::::::::::::::::
     { 
         path : 'usuarios',  

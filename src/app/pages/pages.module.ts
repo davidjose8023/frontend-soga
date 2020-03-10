@@ -28,6 +28,7 @@ import { MedicoComponent } from './medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { PacienteComponent } from './pacientes/paciente.component';
+import { AgendaComponent } from './agenda/agenda.component';
 
 
 
@@ -51,6 +52,7 @@ import { PacienteComponent } from './pacientes/paciente.component';
         BusquedaComponent,
         PacientesComponent,
         PacienteComponent,
+        AgendaComponent,
       ],
       exports:[
         DashboardComponent,

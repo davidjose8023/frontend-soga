@@ -1,0 +1,110 @@
+<div class="row" [@rowsAnimation]>
+  <div class="col-md-12">
+      <div class="card">
+          <div class="">
+              <div class="row">
+                  <div class="col-lg-3">
+                      <div class="card-body">
+                         
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="card card-body">
+                                  <h3 class="box-title m-b-0">Agendar Citas</h3>
+                                  <p class="text-muted m-b-30 font-13"> Calendario de citas médicas </p>
+                                  <div class="row">
+                                      <div class="col-sm-12 col-xs-12">
+                                          <form>
+                                              <div class="form-group">
+                                                  <label for="nombres">Nombres</label>
+                                                  <input type="text" class="form-control" id="nombres" placeholder="Ingrese el nombre">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="apellidos">Apellidos</label>
+                                                <input type="text" class="form-control" id="apellidos" placeholder="Ingrese el apellido">
+                                             </div>
+                                             <div class="form-group">
+                                              <label for="rut">Rut</label>
+                                              <input type="text" class="form-control" id="rut" placeholder="Ingrese el rut">
+                                            </div>
+                                            <div class="form-group">
+                                              <label for="telefono">telefono</label>
+                                              <input type="text" class="form-control" id="telefono" placeholder="Ingrese el telefono">
+                                             </div>
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Ingrese email">
+                                            </div>
+                                             
+                                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Agendar</button>
+                                            <button type="submit" class="btn btn-inverse waves-effect waves-light">Limpiar</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-9">
+                      <div class="card-body b-l calender-sidebar">
+                          <div id="calendar"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modales -->
+
+<div class="modal fade none-border" id="agenda">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><strong>Cita Agendada</strong></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card card-body">
+          
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombres">Nombres</label>
+                                    <input type="text" class="form-control" id="nombres_mod" placeholder="Ingrese el nombre">
+                                </div>
+                                <div class="form-group">
+                                  <label for="apellidos">Apellidos</label>
+                                  <input type="text" class="form-control" id="apellidos_mod" placeholder="Ingrese el apellido">
+                               </div>
+                               <div class="form-group">
+                                <label for="rut">Rut</label>
+                                <input type="text" class="form-control" id="rut_mod" placeholder="Ingrese el rut">
+                               </div>
+                               <div class="form-group">
+                                <label for="telefono">telefono</label>
+                                <input type="text" class="form-control" id="telefono_mod" placeholder="Ingrese el telefono">
+                               </div>
+                               <div class="form-group">
+                                  <label for="email">Email</label>
+                                  <input type="email" class="form-control" id="email_mod" placeholder="Enter email">
+                               </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success save-event waves-effect waves-light">Save</button>
+              <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Eliminar</button>
+          </div>
+      </div>
+  </div>
+</div>

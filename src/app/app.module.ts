@@ -32,7 +32,7 @@ import { PaginadorModule } from './components/paginador/paginador.module';
     RegisterComponent,
     LoginComponent,
     
-    PagesComponent,
+    PagesComponent
     
     
     

@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { trigger,transition,query,style,stagger,animate,keyframes }
 from '@angular/animations'
+import { rowsAnimation } from '../../animaciones-angular/animacion.row';
  
 declare function init_form();
 declare function getvalueSelect();
@@ -30,7 +31,8 @@ declare function setvalueSelect(valor);
         ], {optional: true}),
         query(':leave', animate('50ms', style({ opacity: 0 })),{optional: true})
       ])
-    ]) 
+    ]),
+    rowsAnimation 
   ]
 })
 export class PacienteComponent implements OnInit {
