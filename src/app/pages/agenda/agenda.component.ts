@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { CitaMedicaService  } from 'src/app/service/service.index';
 import { Cita } from '../../models/cita.model';
@@ -25,6 +25,7 @@ export class AgendaComponent implements OnInit {
     end: moment().utc().format('YYYY-MM-DD HH:mm:ss'),
     className: 'bg-danger'
 }]; */
+@ViewChild('inputFecha') inputFecha : ElementRef;
 
   constructor(private _citaService: CitaMedicaService) { }
 
