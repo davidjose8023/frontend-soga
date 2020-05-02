@@ -9,6 +9,82 @@ File: js
     $(this).val($(this).val());
 
 });*/
+function scroll() {
+    $('#slimtest1, #slimtest4').perfectScrollbar();
+
+}function next() {
+    $(".tab-wizard").steps("next",{});
+
+}
+function previous() {
+    $(".tab-wizard").steps("previous",{});
+  
+}
+function finish() {
+    $(".tab-wizard").steps("finish",{});
+  
+}
+function wizard() {
+    $(".tab-wizard").steps({
+        headerTag: "h6"
+        , bodyTag: "section"
+        , transitionEffect: "fade"
+        , titleTemplate: '<span class="step">#index#</span> #title#'
+        ,enableAllSteps: false
+        ,enablePagination: false
+        , labels: {
+            finish: "Finalizar",
+            next: "Siguiente",
+            previous: "Anterior",
+        }
+        , onFinished: function (event, currentIndex) {
+           swal("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+                
+        }
+    });
+    
+    
+    var form = $(".validation-wizard").show();
+    
+    $(".validation-wizard").steps({
+        headerTag: "h6"
+        , bodyTag: "section"
+        , transitionEffect: "fade"
+        , titleTemplate: '<span class="step">#index#</span> #title#'
+        , labels: {
+            finish: "Finalizar",
+            next: "Siguiente",
+            previous: "Anterior",
+        }
+        , onStepChanging: function (event, currentIndex, newIndex) {
+            return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
+        }
+        , onFinishing: function (event, currentIndex) {
+            return form.validate().settings.ignore = ":disabled", form.valid()
+        }
+        , onFinished: function (event, currentIndex) {
+             swal("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+        }
+    }), $(".validation-wizard").validate({
+        ignore: "input[type=hidden]"
+        , errorClass: "text-danger"
+        , successClass: "text-success"
+        , highlight: function (element, errorClass) {
+            $(element).removeClass(errorClass)
+        }
+        , unhighlight: function (element, errorClass) {
+            $(element).removeClass(errorClass)
+        }
+        , errorPlacement: function (error, element) {
+            error.insertAfter(element)
+        }
+        , rules: {
+            email: {
+                email: !0
+            }
+        }
+    })
+}
 
 function init_calendar(event) {
     !function($) {
@@ -98,12 +174,13 @@ function init_calendar(event) {
                 dayNamesShort:['Lun', 'Mar', 'Mier', 'Jue', 'Vier', 'Sab', 'Dom'],
                 minTime: '08:00:00',
                 maxTime: '19:00:00',  
-                defaultView: 'month',  
+                defaultView: 'month',
+                height: 600,
                 //handleWindowResize: true,  
                 
                 views: {
                     month:{ buttonText: 'Calendario' },
-                    agendaDay: { buttonText: 'Lista dpor día' }
+                    agendaDay: { buttonText: 'Lista por día' }
                 },
                  
                 header: {

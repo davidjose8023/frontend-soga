@@ -43,6 +43,7 @@ export class PacienteComponent implements OnInit {
   forma : FormGroup;
   patologias : any[]=[];
   patologia: any;
+  selected = [];
  
   @ViewChild('inputFecha') inputFecha : ElementRef;
   @ViewChild('selectEnfermedad') selectEnfermedad : ElementRef;
@@ -55,10 +56,6 @@ export class PacienteComponent implements OnInit {
   fechaNacimientoValidado: any = {has_danger:'', form_control_danger:'', msj:''};
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
- 
- 
-
- 
   constructor(
     private titulo_navegador: Title, 
     private _pacienteService: PacienteService,
@@ -93,7 +90,8 @@ export class PacienteComponent implements OnInit {
     init_form();
  
     this._patologiaService.enfermedadXCategoria().subscribe((resp:any) => {
-      this.patologias = resp.categorias;
+      console.log(resp);
+      this.patologias = resp;
     
     });
     this.activateRoute.params.subscribe(params => {
@@ -255,7 +253,7 @@ export class PacienteComponent implements OnInit {
 
     this._pacienteService.obtenerPaciente(id)
           .subscribe( (resp: any) => {
-            console.log(resp);
+            //console.log(resp);
             this.paciente= resp.paciente;
      
             this.nombres.setValue(resp.paciente.nombres);
@@ -270,7 +268,8 @@ export class PacienteComponent implements OnInit {
               this.fecha_nacimiento.setValue(resp.paciente.fecha_nacimiento);
             }
             
-            setvalueSelect(resp.paciente.patologia);
+            this.selected = resp.paciente.patologia
+            //setvalueSelect(resp.paciente.patologia);
    
           });
 
@@ -296,17 +295,18 @@ onFocusOut(event) {
 }
 
 crearPaciente(){
-
+    console.log(this.selected);
     if(this.inputFecha.nativeElement.value){
       this.fecha_nacimiento.setValue(this.inputFecha.nativeElement.value);
     }
+  
    
      
-    this.patologia = getvalueSelect();
+    //this.patologia = getvalueSelect();
   
     
  
-    console.log(this.forma);
+    //console.log(this.forma);
    
 
     if(this.forma.invalid){
@@ -329,7 +329,8 @@ crearPaciente(){
       pacienteForm.email = this.forma.value.correo;
       pacienteForm.ec = this.forma.value.ec;
       pacienteForm.fecha_nacimiento = this.forma.value.fecha_nacimiento;
-      pacienteForm.patologia = this.patologia;
+      pacienteForm.patologia = this.selected;
+      //pacienteForm.patologia = this.patologia;
       if(this.paciente._id){
         pacienteForm.usuario = this.paciente.usuario;
         pacienteForm._id = this.paciente._id;
@@ -341,6 +342,7 @@ crearPaciente(){
       .subscribe( paciente => {
       
         this.paciente._id =  paciente._id;
+        this.paciente.nombres=paciente.nombres;
 
         if(this.imagenSubir && !paciente.img){
 

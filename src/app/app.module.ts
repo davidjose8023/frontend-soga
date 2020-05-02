@@ -22,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
 import { MyErrorHandler } from './myerrorhandler.component';
 import { ErrorHandler } from '@angular/core';
 import { PaginadorModule } from './components/paginador/paginador.module';
+import { CrearCitaWizardModule } from './components/crear-cita-wizard/crear-cita-wizard.module';
 
 
 
@@ -47,7 +48,8 @@ import { PaginadorModule } from './components/paginador/paginador.module';
     ReactiveFormsModule,
     ServiceModule,
     SharedModule,
-    PaginadorModule
+    PaginadorModule,
+    CrearCitaWizardModule
     
   ],
   //providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],

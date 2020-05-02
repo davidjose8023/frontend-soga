@@ -1,60 +1,144 @@
 <div class="row animated fadeIn">
-  
-
-<div class="col-lg-6">
-    <div class="card">
-        <div class="card-header bg-info">
-            <h4 class="m-b-0 text-white">Médico</h4>
-        </div>
-        <div class="card-body">
-            <form ngNativeValidate #f="ngForm" (ngSubmit)="guardarMedico( f )"  class="form-horizontal form-bordered">
-                <div class="form-body">
-                    <div class="form-group row">
-                        <label class="control-label text-right col-md-3">Nombre</label>
-                        <div class="col-md-9">
-                        <input [(ngModel)]="medico.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre de usuario" required>
-                            <!-- <small class="form-control-feedback"> This is inline help </small>  -->
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="control-label text-right col-md-3">Hospital</label>
-                        <div class="col-md-9">
+    <div class="col-lg-3 col-xlg-3 col-md-3">
+        <div class="card">
+    
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#foto" role="tab"><h4>Foto</h4></a> </li>
+                
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="foto" role="tabpanel">
+                    <div class="card">
+    
+                        <div class="card-body">
                             
-                            <select (change)="cambiarImgHospital( $event.target.value )"  [(ngModel)]="medico.hospital" name="hospital" class="form-control custom-select" required>
-                                <option value="">Seleccione ...</option>
-                                <option *ngFor="let hospital of hospitales"  [value]="hospital._id">
-                                    {{ hospital.nombre }}
-                                </option>
-                            
+                            <div align="center" class="m-t-40"> 
                                 
-                            </select>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-        
-                                <div class="offset-sm-3 col-md-9">
-                                    <div class="button-group">
-                                        
-                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+                
+                                <img *ngIf="!imagenTemp" [src]="medico.img || 'xxx' | imagen: 'medicos'" class="img-circle" width="200">
+                                <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="250">
+                                 <h4 class="card-title m-t-10">{{ medico.nombres }}</h4>
+                                
+                                
+                                <div class="row text-center justify-content-md-center">
                                     
-                                        <a [routerLink]="['/medicos']" class="btn btn-inverse"><i class="fa fa-mail-reply"></i> Volver</a>
-                                    </div>
+                                    <label class="custom-file d-block">
+                                        <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
+                                        <span class="custom-file-control"></span>
+                                    </label>
                                 </div>
+                
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </div>
+      </div>
+
+  <div class="col-lg-9 col-xlg-9 col-md-9">
+    
+    <div class="card">
+
+        <ul class="nav nav-tabs profile-tab" role="tablist">
+            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><h4>Datos Personales</h4></a> </li>
+            
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="home" role="tabpanel">
+                <!-- <div class="card"> -->
+                 
+                    <div class="card-body">
+                        <form  autocomplete="off" ngNativeValidate #f="ngForm" (ngSubmit)="guardarMedico( f )"  class="form-horizontal form-bordered">
+                            <div class="form-body">
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Nombre</label>
+                                    <div class="col-md-7">
+                                    <input [(ngModel)]="medico.nombre" name="nombre" type="text" class="form-control"  required>
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Apellido</label>
+                                    <div class="col-md-7">
+                                    <input [(ngModel)]="medico.apellido" name="apellido" type="text" class="form-control">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Email</label>
+                                    <div class="col-md-7">
+                                    <input [(ngModel)]="medico.email" name="email" type="email" class="form-control">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Teléfono</label>
+                                    <div class="col-md-7">
+                                    <input [(ngModel)]="medico.telefono" name="telefono" type="text" class="form-control">
+                                        
+                                    </div>
+                                </div>
+            
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Hospital</label>
+                                    <div class="col-md-7">
+                                        
+                                        <select  [(ngModel)]="medico.hospital" name="hospital" class="form-control custom-select" required>
+                                            <!-- <option value="">Seleccione ...</option> -->
+                                            <option [value]="0">Seleccione</option>
+                                            <option *ngFor="let hospital of hospitales"  [value]="hospital._id">
+                                                {{ hospital.nombre }}
+                                            </option>
+                                        
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Especialidad</label>
+                                    <div class="col-md-7">
+                                        
+                                        <select [(ngModel)]="medico.especialidad" name="especialidad" class="form-control custom-select" required>
+                                            <option [value]="0">Seleccione</option>
+                                            <option *ngFor="let especialidad of especialidadesMedicas"  [value]="especialidad._id">
+                                                {{ especialidad.nombre }}
+                                            </option>
+                                        
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                       
+                            <div class="col-md-12">
+                                
+            
+                                <div class="offset-sm-3 col-md-9">
+                                    <div class="button-group">
+                                        
+                                        <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success"> <i class="fa fa-check"></i> Guardar</button>
+                                    
+                                        <a [routerLink]="['/medicos']" class="btn waves-effect waves-light btn-rounded btn-inverse"><i class="fa fa-mail-reply"></i> Volver</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                          
+                        </form>
+                    </div>
+                
+            </div>
         </div>
     </div>
-</div>
-<div class="col-lg-3" *ngIf="medico._id">
+  </div>
+
+  
+
+
+<!-- <div class="col-lg-3" *ngIf="medico._id">
     <div class="card">
         <div class="card-header bg-info">
             <h4 class="m-b-0 text-white">Foto del Médico</h4>
@@ -62,12 +146,12 @@
         <div class="card">
             <div class="card-body">
                 <div align="center" class="m-t-40"> 
-                    <!-- <img src="../assets/images/users/5.jpg" class="img-circle" width="200"> -->
+                    
     
                     <img *ngIf="!imagenTemp" [src]="medico.img || 'xxx' | imagen: 'medicos'" class="img-circle" width="200">
                     <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="200">
                      <h4 class="card-title m-t-10">{{ medico.nombre }}</h4>
-                    <!--<h6 class="card-subtitle">Accoubts Manager Amix corp</h6> -->
+                    
                     
                     <div class="row text-center justify-content-md-center">
                         
@@ -87,29 +171,13 @@
         
         </div>
     </div>
-</div>
-<div class="col-lg-3">
+</div> -->
+<!-- <div class="col-lg-3">
     <div class="card">
         <div class="card-header bg-info">
             <h4 class="m-b-0 text-white">Hospital</h4>
         </div>
-        <!-- <div class="card-body">
-            <form class="form-horizontal form-bordered">
-                <div class="form-body">
-                
-                    <h4 class="card-title">Foto</h4>
-                    <h6 *ngIf="hospital._id" class="card-subtitle">{{ hospital.nombre }}</h6>
-                    <div class="form-group">
-                        <img  [src]="hospital.img | imagen: 'hospitales'" class="rounded img-fluid">
-                        
-            
-                    </div>
-                    
-                    
-                </div>
-
-            </form>
-        </div> -->
+ 
         <div class="card">
             <div class="card-body">
                 <div align="center" class="m-t-40"> 
@@ -122,7 +190,7 @@
         
         </div>
     </div>
-</div>
+</div> -->
 
 
 </div>

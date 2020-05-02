@@ -1,14 +1,241 @@
 <div class="row" [@listStagger] [@rowsAnimation]>
-  <div class="col-lg-6">
+
+    <div class="col-lg-3 col-xlg-3 col-md-3">
+        <div class="card">
+    
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#foto" role="tab"><h4>Foto</h4></a> </li>
+                
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="foto" role="tabpanel">
+                    <div class="card">
+                        <!-- <div class="card"> -->
+                            <div class="card-body">
+                        
+                                <div align="center" class="m-t-40"> 
+                                    
+                    
+                                    <img *ngIf="!imagenTemp" [src]="paciente.img || 'xxx' | imagen: 'pacientes'" class="img-circle" width="200">
+                                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="250">
+                                     <h4 class="card-title m-t-10">{{ paciente.nombres }}</h4>
+                                    
+                                    
+                                    <div class="row text-center justify-content-md-center">
+                                        
+                                        <label class="custom-file d-block">
+                                            <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
+                                            <span class="custom-file-control"></span>
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                        
+                        <!-- </div> -->
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 col-xlg-7 col-md-7">
+        <div class="card">
+    
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><h4>Datos Personales</h4></a> </li>
+                
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel">
+
+                    <div class="card">
+          
+                        <div class="card-body">
+                          
+                            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="crearPaciente()">
+                                <div class="form-body">
+                
+                                 
+                                    <div class="row p-t-20">
+                                        <div class="col-md-6">
+                                            <div [class]="nombres.invalid && (nombres.dirty || nombres.touched)  ? nombresValidado.has_danger:'form-group'">
+                                                <label class="control-label">Nombres</label>
+                                            <input  formControlName="nombres"   name="nombres" required type="text" id="nombre" class="form-control {{ nombresValidado.form_control_danger }}">
+                                                <small *ngIf="nombres.invalid && (nombres.dirty || nombres.touched) "  class="form-control-feedback">{{nombresValidado.msj}}</small> 
+                                              </div>
+                                        </div>
+                                     
+                                        <div class="col-md-6">
+                                
+                                            <div [class]="apellidos.invalid && (apellidos.dirty || apellidos.touched)  ? apellidosValidado.has_danger:'form-group'">
+                                                <label class="control-label">Apellidos</label>
+                              
+                                                <input formControlName="apellidos"   name="apellido"  type="text" required id="apellido" class="form-control {{ apellidosValidado.form_control_danger }}">
+                                                <small *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="form-control-feedback"> {{apellidosValidado.msj}} </small> 
+                                              </div> 
+                                        </div>
+                                    
+              
+                                        
+                                    </div>
+                                  
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="control-label">Sexo</label>
+                                              <select formControlName="sexo"  name="sexo"  class="form-control custom-select" >
+                                                  <option value="0">Seleccione</option>
+                                                  <option value="f">Femenino</option>
+                                                  <option value="m">Masculino</option>
+                                  
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div [class]="fecha_nacimiento.invalid && (!fecha_nacimiento.pristine )  ? fechaNacimientoValidado.has_danger:'form-group'">
+                                              <label class="control-label">Fecha de nacimiento</label>
+                                            
+                                                  <input #inputFecha data-date-format='dd/mm/yyyy'  formControlName="fecha_nacimiento"  (focusout)="onFocusOut($event)" name="fecha_nacimiento"  type="text" class="form-control fecha_form" id="fecha_form" placeholder="dd/mm/yyyy">
+                                                  <small *ngIf="fecha_nacimiento.invalid && (!fecha_nacimiento.pristine)" class="form-control-feedback"> {{fechaNacimientoValidado.msj}} </small> 
+                                           
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="control-label">Estado Civil</label>
+                                              <select formControlName="ec"  name="ec"  class="form-control custom-select" >
+                                                  <option [value]="0">Seleccione</option>
+                                                  <option value="c">Casado</option>
+                                                  <option value="s">Soltero</option>
+                                                  <option value="v">Viudo</option>
+                                  
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div [class]="rut.invalid && (rut.dirty || rut.touched)  ? rutValidado.has_danger:'form-group'">
+                                              <label class="control-label">Rut</label>
+                                              <input formControlName="rut"   required type="text" id="rut" class="form-control">
+                                              <small *ngIf="rut.invalid && (rut.dirty || rut.touched)" class="form-control-feedback"> {{rutValidado.msj}} </small> 
+                                          </div> 
+                                      </div>
+                             
+                                    </div>
+                           
+                                    <div class="row">
+              
+                                      
+              
+                                      <div class="col-md-6">
+                                          <div [class]="telefono.invalid && (telefono.dirty || telefono.touched)  ? telefonoValidado.has_danger:'form-group'">
+                                              <label class="control-label">Telefono</label>
+                                              <input formControlName="telefono"  required type="text" id="telefono" class="form-control">
+                                              <small *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="form-control-feedback"> {{telefonoValidado.msj}} </small> 
+                                          </div> 
+                                      </div>
+              
+                                      <div class="col-md-6">
+                                          <div [class]="correo.invalid && (correo.dirty || correo.touched)  ? correoValidado.has_danger:'form-group'">
+                                              <label class="control-label">Email</label>
+                                              <input formControlName="correo"  required type="email" id="correo" name ="correo" class="form-control">
+                                              <small *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="form-control-feedback"> {{correoValidado.msj}} </small> 
+                                          </div> 
+                                      </div>
+                                      <div class="col-md-6">
+                  
+                                          <div class="form-group">
+                                              <label for="especialidad">Enfermedad ó alergia</label>
+                                              <ng-select 
+                                                  [items]="patologias"
+                                                  bindLabel="nombre"
+                                                  groupBy="catg"
+                                          
+                                                  placeholder="Seleciona enfermedad ó alergia"
+                                                  appendTo="body"
+                                                  multiple="true"
+                                                  [(ngModel)]="selected"
+                                                  [ngModelOptions]="{standalone: true}" >
+                                             
+                                              </ng-select>
+                                            </div>
+                                      </div>
+                    
+                                    </div>
+                               
+                               
+                                    
+                                </div>
+                                <div>
+                                  <hr> 
+                                  </div>
+                                <div class="button-group">
+                                    
+                                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-info" > <i class="fa fa-check"></i> Guardar</button>
+                                    <button [routerLink]="['/pacientes']" type="button" class="btn waves-effect waves-light btn-rounded btn-inverse"><i class="fa fa-mail-reply"></i> Volver</button>
+                                </div>
+               
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- <div class="col-lg-3">
+        <div class="card">
+           
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div>
+                            <h4 class="card-title"><span class="lstick"></span>Foto</h4>
+                     
+                        </div>
+                        
+                        
+                     </div>
+                    <div align="center" class="m-t-40"> 
+                        
+        
+                        <img *ngIf="!imagenTemp" [src]="paciente.img || 'xxx' | imagen: 'pacientes'" class="img-circle" width="200">
+                        <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="250">
+                         <h4 class="card-title m-t-10">{{ paciente.nombres }}</h4>
+                        
+                        
+                        <div class="row text-center justify-content-md-center">
+                            
+                            <label class="custom-file d-block">
+                                <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
+                                <span class="custom-file-control"></span>
+                            </label>
+                        </div>
+        
+                    </div>
+                </div>
+            
+        
+    
+        </div>
+    </div> -->
+                    
+  <!-- <div class="col-lg-6">
       <div class="card">
-          <div class="card-header bg-info">
-              <h4 class="m-b-0 text-white">Paciente Nuevo</h4>
-          </div>
+      
           <div class="card-body">
+            <div class="d-flex no-block">
+                <div>
+                    <h3 class="card-title"><span class="lstick"></span>Datos Personales</h3>
+                    <h6 class="card-subtitle">Lista de Pacientes</h6>
+                </div>
+                
+                
+             </div>
               <form autocomplete="off" [formGroup]="forma" (ngSubmit)="crearPaciente()">
                   <div class="form-body">
-                      <h3 class="card-title">Datos Personales</h3>
-                      <hr>
+              
+                   
                       <div class="row p-t-20">
                           <div class="col-md-6">
                               <div [class]="nombres.invalid && (nombres.dirty || nombres.touched)  ? nombresValidado.has_danger:'form-group'">
@@ -17,7 +244,7 @@
                                   <small *ngIf="nombres.invalid && (nombres.dirty || nombres.touched) "  class="form-control-feedback">{{nombresValidado.msj}}</small> 
                                 </div>
                           </div>
-                          <!--/span-->
+                        
                           <div class="col-md-6">
                   
                               <div [class]="apellidos.invalid && (apellidos.dirty || apellidos.touched)  ? apellidosValidado.has_danger:'form-group'">
@@ -27,11 +254,11 @@
                                   <small *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="form-control-feedback"> {{apellidosValidado.msj}} </small> 
                                 </div> 
                           </div>
-                          <!--/span-->
+                        
 
                           
                       </div>
-                      <!--/row-->
+                      
                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -74,7 +301,7 @@
                         </div>
                
                       </div>
-                      <!--/row-->
+                     
                       <div class="row">
 
                         
@@ -109,6 +336,22 @@
                                 </select>
   
                             </div> 
+
+                            <div class="form-group">
+                                <label for="especialidad">Enfermedad ó alergia</label>
+                                <ng-select 
+                                    [items]="patologias"
+                                    bindLabel="nombre"
+                                    groupBy="catg"
+                            
+                                    placeholder="Seleciona enfermedad ó alergia"
+                                    appendTo="body"
+                                    multiple="true"
+                                    [(ngModel)]="selected"
+                                    [ngModelOptions]="{standalone: true}" >
+                               
+                                </ng-select>
+                              </div>
                         </div>
       
                       </div>
@@ -127,35 +370,6 @@
               </form>
           </div>
       </div>
-  </div>
-  <div class="col-lg-3">
-    <div class="card">
-        <div class="card-header bg-info">
-            <h4 class="m-b-0 text-white">Foto del Paciente</h4>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <div align="center" class="m-t-40"> 
-                    
-    
-                    <img *ngIf="!imagenTemp" [src]="paciente.img || 'xxx' | imagen: 'pacientes'" class="img-circle" width="200">
-                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle" width="250">
-                     <h4 class="card-title m-t-10">{{ paciente.nombres }}</h4>
-                    
-                    
-                    <div class="row text-center justify-content-md-center">
-                        
-                        <label class="custom-file d-block">
-                            <input (change)= "seleccionImagen( $event.target.files[0] )" type="file" id="file" class="custom-file-input">
-                            <span class="custom-file-control"></span>
-                        </label>
-                    </div>
-    
-                </div>
-            </div>
-        
-        </div>
-
-    </div>
-</div>
+  </div> -->
+  
 </div>

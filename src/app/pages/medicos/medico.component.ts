@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import { UsuarioService } from '../../service/usuario/usuario.service';
 import { SubirArchivoService } from '../../service/subir-archivo/subir-archivo.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EspecialidadesMedicas } from "../../data/especialidades.interface";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class MedicoComponent implements OnInit {
   
   medico: Medico = new Medico('', '', '', '', '');
   hospitales: Hospital[]= [];
+  especialidadesMedicas: EspecialidadesMedicas[]= [];
   hospital: Hospital = new Hospital('');
   imagenSubir: File;
   imagenTemp: any;
@@ -35,6 +37,8 @@ export class MedicoComponent implements OnInit {
 
     this._hospitalservice.cargarHospitalAll()
         .subscribe( (hospitales: Hospital[]) => this.hospitales = hospitales);
+    this._hospitalservice.especialidadesMedicas()
+        .subscribe( (especialidades: EspecialidadesMedicas[]) => {this.especialidadesMedicas = especialidades; console.log(this.especialidadesMedicas);});
 
 
     this.activateRoute.params.subscribe(params => {
@@ -90,11 +94,22 @@ export class MedicoComponent implements OnInit {
   guardarMedico(f: NgForm){
     
     this.medico.usuario = this._usuarioService.usuario._id;
+
+    if(this.medico._id){
+      
+      this.medico.img = this.medico.img;
+    }
     
     this._medicoService.guardarMedico( this.medico)
         .subscribe( medico => {
           //console.log(medico);
           this.medico._id=  medico._id;
+ 
+
+        if(this.imagenSubir && !medico.img){
+
+          this._medicoService.cambiarImagenNuevo(this.imagenSubir, this.medico._id);
+        }
           
           //this.hospital=  medico.hospital;
 

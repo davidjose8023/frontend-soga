@@ -12,8 +12,18 @@ export class PatologiaService {
   constructor(public http: HttpClient ) { }
 
   enfermedadXCategoria(){
-    let url = `${URL_SERVICIOS}/enfermedad/categoria`;
+    let url = `${URL_SERVICIOS}/enfermedad`;
 
-    return this.http.get(url);  
+    //return this.http.get(url);  
+    return this.http.get(url).pipe(map((resp: any) => {
+      let enfermedad = resp.enfermedad
+      enfermedad.forEach((element, index) => {
+        enfermedad[index]['catg']= element.categoria.nombre
+        
+      });
+
+      return enfermedad;
+
+    }));  
   }
 }

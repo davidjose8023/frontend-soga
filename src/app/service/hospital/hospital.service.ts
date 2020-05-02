@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 import swal from 'sweetalert';
 
 import { URL_SERVICIOS } from '../../config/config';
 
 import { Hospital } from '../../models/hospital.model';
 import { UsuarioService } from '../usuario/usuario.service';
+import { ESPECIALIDADES } from "../../data/espcialidades";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,10 @@ import { UsuarioService } from '../usuario/usuario.service';
 export class HospitalService {
 
   constructor(public http: HttpClient, public _usuarioService: UsuarioService) { }
+
+  especialidadesMedicas(){
+    return of(ESPECIALIDADES);
+  }
 
   cargarHospital(desde:number = 0){
 

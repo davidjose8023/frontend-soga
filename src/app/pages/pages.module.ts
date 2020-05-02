@@ -3,9 +3,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // modulos
 import { PaginadorModule } from '../components/paginador/paginador.module';
+import { CrearCitaWizardModule } from '../components/crear-cita-wizard/crear-cita-wizard.module';
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 //ng2-charts
 import { ChartsModule } from 'node_modules/ng2-charts';
 
@@ -32,6 +35,7 @@ import { AgendaComponent } from './agenda/agenda.component';
 
 
 
+
 @NgModule({
     declarations: [
         //PagesComponent,
@@ -52,14 +56,14 @@ import { AgendaComponent } from './agenda/agenda.component';
         BusquedaComponent,
         PacientesComponent,
         PacienteComponent,
-        AgendaComponent,
+        AgendaComponent
       ],
       exports:[
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
         IncrementadoComponent,
-        GraficoDonaComponent,
+        GraficoDonaComponent
       ],
       imports:[
           CommonModule,
@@ -69,7 +73,10 @@ import { AgendaComponent } from './agenda/agenda.component';
           ReactiveFormsModule,
           ChartsModule,
           PipesModule,
-          PaginadorModule
+          PaginadorModule,
+          CrearCitaWizardModule,
+          NgSelectModule
+
       ],
       providers: [
         DatePipe

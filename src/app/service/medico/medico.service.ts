@@ -92,5 +92,19 @@ export class MedicoService {
     });
   }
 
+  cambiarImagenNuevo(archivo: File, id: string){  
+    //console.log('cambiarImagen profileCompone');
+    this._subirImagenService.subirArchivo(archivo,'medicos',id)
+    .then((resp: any) => {
+   
+
+    })
+    .catch( resp => {
+
+      swal("Error", "Error al guardar foto del Medico", "error");
+
+    });
+  }
+
 
 }
